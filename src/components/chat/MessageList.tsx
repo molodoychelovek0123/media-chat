@@ -11,7 +11,7 @@ import AgentMessage from './AgentMessage'
 // Основной компонент MessageList
 const MessageList: React.FC = memo(() => {
   const { theme } = useTheme()
-  const { messages, isTyping } = useChat()
+  const { messages, isTyping, handleAgentAction } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [visibleMessages, setVisibleMessages] = useState<Set<string>>(new Set())
@@ -41,7 +41,10 @@ const MessageList: React.FC = memo(() => {
     const handleAction = (action: any) => {
       // Обработка действий от компонентов (кнопки, формы, быстрые ответы)
       console.log('Action received:', action)
-      // Здесь можно добавить логику обработки действий
+      // Передаем действие в контекст чата для обработки
+      if (handleAgentAction) {
+        handleAgentAction(action)
+      }
     }
 
     const isVisible = visibleMessages.has(message.id)
@@ -82,12 +85,12 @@ const MessageList: React.FC = memo(() => {
         </div>
       )
     }
-  }, [theme, visibleMessages])
+  }, [theme, visibleMessages, handleAgentAction])
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className="h-full overflow-y-auto p-6"
+      className="h-full overflow-y-auto p-6 scroll-smooth"
       style={{
         backgroundColor: theme.colors.background
       }}

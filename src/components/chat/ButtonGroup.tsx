@@ -16,9 +16,9 @@ const ButtonGroup: React.FC<ButtonGroupProps> = memo(({
   const handleButtonClick = useCallback((button: ButtonItem) => {
     if (button.disabled) return;
 
-    // Вызов действия кнопки
+    // Вызов действия кнопки - передаем полный объект кнопки
     if (onAction) {
-      onAction(button.action);
+      onAction(button);
     }
 
     // Можно добавить аналитику или логирование кликов

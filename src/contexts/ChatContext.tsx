@@ -128,11 +128,33 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }: ChatProv
       // Отправка сообщения агенту
       const response = await agentService.sendMessage(content)
       
+      console.log('Agent response:', response) // Отладка
+      
       // Обработка ответа агента с поддержкой всех типов сообщений
       const agentMessage = processAgentResponse(response)
       
       if (agentMessage) {
         dispatch({ type: 'ADD_MESSAGE', payload: agentMessage })
+        
+        // Если есть действия (кнопки), создаем дополнительное сообщение с кнопками
+        if (response.actions && response.actions.length > 0) {
+          console.log('Creating button message with actions:', response.actions) // Отладка
+          const buttonMessage = {
+            id: `buttons-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+            type: 'button-group' as const,
+            buttons: response.actions.map((action, index) => ({
+              id: `btn-${index}`,
+              label: action.label,
+              action: action.payload,
+              variant: 'primary' as const
+            })),
+            timestamp: new Date(),
+            sender: 'agent' as const,
+            status: 'sent' as const,
+            layout: 'horizontal' as const
+          }
+          dispatch({ type: 'ADD_MESSAGE', payload: buttonMessage })
+        }
       } else {
         // Создаем стандартное текстовое сообщение
         const fallbackMessage: TextMessage = {
@@ -228,12 +250,25 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }: ChatProv
     dispatch({ type: 'SET_TYPING', payload: isTyping })
   }, [])
 
-  const handleAgentAction = useCallback(async (action: AgentAction) => {
+  const handleAgentAction = useCallback(async (action: any) => {
+    console.log('handleAgentAction received:', action) // Отладка
+    
     // Обработка действий агента (кнопки, ссылки и т.д.)
+    let actionText = 'Выбрано действие'
+    let messageToSend = action
+    
+    if (typeof action === 'object' && action.label) {
+      actionText = `Выбрано: ${action.label}`
+      messageToSend = action.label
+    } else if (typeof action === 'string') {
+      actionText = `Выбрано: ${action}`
+      messageToSend = action
+    }
+
     const actionMessage: TextMessage = {
       id: `action-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       type: 'text',
-      content: `Выбрано: ${action.label}`,
+      content: actionText,
       timestamp: new Date(),
       sender: 'user',
       status: 'sent',
@@ -243,7 +278,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }: ChatProv
     dispatch({ type: 'ADD_MESSAGE', payload: actionMessage })
     
     // Отправка действия агенту
-    await sendMessage(action.payload)
+    await sendMessage(messageToSend)
   }, [sendMessage])
 
   const value = {

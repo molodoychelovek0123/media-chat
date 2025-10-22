@@ -76,7 +76,7 @@ export const AgentProvider: React.FC<AgentProviderProps> = ({ children }) => {
       sender: 'agent',
       status: 'sent',
       format: 'plain'
-    }
+    } as Message
   }, [])
 
   const value = {

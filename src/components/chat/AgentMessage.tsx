@@ -27,7 +27,7 @@ const MessageComponents: Record<string, React.ComponentType<any>> = {
   image: LazyImageMessage,
   progress: LazyProgressMessage,
   reasoning: LazyCollapsibleReasoning,
-  buttons: LazyButtonGroup,
+  'button-group': LazyButtonGroup,
   links: LazyLinksGallery,
 };
 
@@ -45,9 +45,11 @@ const AgentMessage: React.FC<AgentMessageProps> = memo(({
   }, [message.timestamp]);
 
   // Получение соответствующего компонента для типа сообщения
-  const MessageComponent = MessageComponents[message.type] || (() => (
+  // Учитываем метаданные для определения типа отображения
+  const messageType = (message as any).metadata?.messageType || message.type;
+  const MessageComponent = MessageComponents[messageType] || (() => (
     <div className="text-sm text-gray-500">
-      Неподдерживаемый тип сообщения: {message.type}
+      Неподдерживаемый тип сообщения: {messageType}
     </div>
   ));
 

@@ -58,10 +58,10 @@ const ChatContainer: React.FC = memo(() => {
       </div>
 
       {/* Main Chat Area */}
-      <div className="sdds-chat-main flex-1 flex flex-col overflow-hidden">
+      <div className="sdds-chat-main flex-1 flex flex-col">
         {/* Messages Container */}
         <div
-          className="sdds-chat-messages flex-1 overflow-hidden theme-transition"
+          className="sdds-chat-messages flex-1 overflow-y-auto theme-transition"
           style={{
             backgroundColor: theme.colors.background,
             transition: 'background-color var(--theme-transition)'
