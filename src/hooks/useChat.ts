@@ -1,7 +1,6 @@
 import { useContext, useCallback } from 'react'
 import { ChatContext } from '@/contexts/ChatContext'
-import { Message, TextMessage, FileMessage } from '@/types/chat'
-import { AgentAction } from '@/types/agent'
+import { Message, FileMessage } from '@/types/chat'
 
 export const useChat = () => {
   const context = useContext(ChatContext)
@@ -20,7 +19,7 @@ export const useChat = () => {
   } = context
 
   // Вспомогательные методы для работы с сообщениями
-  const addMessage = useCallback((message: Message) => {
+  const addMessage = useCallback(() => {
     // Этот метод уже реализован через sendMessage и uploadFile
     console.log('Use sendMessage or uploadFile instead of addMessage')
   }, [])
@@ -94,16 +93,6 @@ export const useChat = () => {
   }, [setAgentTyping])
 
   const sendQuickReply = useCallback(async (text: string) => {
-    const quickMessage: TextMessage = {
-      id: `quick-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      type: 'text',
-      content: text,
-      timestamp: new Date(),
-      sender: 'user',
-      status: 'sent',
-      format: 'plain'
-    }
-
     // Добавляем сообщение и сразу отправляем агенту
     await sendMessage(text)
   }, [sendMessage])

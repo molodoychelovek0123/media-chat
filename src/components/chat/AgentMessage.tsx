@@ -1,6 +1,17 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo, Suspense } from 'react';
 import { Message } from '@/types/chat';
 import { Theme } from '@/types/theme';
+import { LoadingFallback } from './LazyComponents';
+
+// Ленивая загрузка компонентов сообщений
+const LazyTextMessage = React.lazy(() => import('./TextMessage'));
+const LazyFormMessage = React.lazy(() => import('./FormMessage'));
+const LazyTableMessage = React.lazy(() => import('./TableMessage'));
+const LazyImageMessage = React.lazy(() => import('./ImageMessage'));
+const LazyProgressMessage = React.lazy(() => import('./ProgressMessage'));
+const LazyCollapsibleReasoning = React.lazy(() => import('./CollapsibleReasoning'));
+const LazyButtonGroup = React.lazy(() => import('./ButtonGroup'));
+const LazyLinksGallery = React.lazy(() => import('./LinksGallery'));
 
 interface AgentMessageProps {
   message: Message;
@@ -8,61 +19,83 @@ interface AgentMessageProps {
   onAction?: (action: any) => void;
 }
 
-const AgentMessage: React.FC<AgentMessageProps> = memo(({ 
-  message, 
-  theme, 
-  onAction 
+// Компоненты для разных типов сообщений
+const MessageComponents: Record<string, React.ComponentType<any>> = {
+  text: LazyTextMessage,
+  form: LazyFormMessage,
+  table: LazyTableMessage,
+  image: LazyImageMessage,
+  progress: LazyProgressMessage,
+  reasoning: LazyCollapsibleReasoning,
+  buttons: LazyButtonGroup,
+  links: LazyLinksGallery,
+};
+
+const AgentMessage: React.FC<AgentMessageProps> = memo(({
+  message,
+  theme,
+  onAction
 }) => {
+  // Мемоизация времени для предотвращения лишних вычислений
+  const formattedTime = useMemo(() => {
+    return message.timestamp.toLocaleTimeString('ru-RU', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }, [message.timestamp]);
+
+  // Получение соответствующего компонента для типа сообщения
+  const MessageComponent = MessageComponents[message.type] || (() => (
+    <div className="text-sm text-gray-500">
+      Неподдерживаемый тип сообщения: {message.type}
+    </div>
+  ));
+
   return (
-    <div className="flex justify-start mb-4">
+    <div className="flex justify-start mb-4 gpu-accelerated">
       <div className="flex items-start gap-3 max-w-[80%]">
-        {/* Аватар агента */}
-        <div 
-          className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium"
+        {/* Аватар агента с анимацией */}
+        <div
+          className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium hover-lift scale-press"
           style={{
             backgroundColor: theme.colors.secondary,
-            color: '#FFFFFF'
+            color: '#FFFFFF',
+            cursor: 'pointer'
           }}
+          title="AI Консультант"
         >
           AI
         </div>
         
         {/* Контейнер сообщения */}
-        <div className="flex flex-col">
-          {/* Пузырек сообщения */}
-          <div 
-            className="rounded-2xl px-4 py-3 shadow-lg"
+        <div className="flex flex-col flex-1">
+          {/* Пузырек сообщения с улучшенными анимациями */}
+          <div
+            className="rounded-2xl px-4 py-3 shadow-lg hover-lift form-transition"
             style={{
               backgroundColor: theme.colors.surface,
               color: theme.colors.text.primary,
-              border: `1px solid ${theme.colors.border}`
+              border: `1px solid ${theme.colors.border}`,
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
             }}
           >
-            {/* Содержимое сообщения будет рендериться через специализированные компоненты */}
-            <div className="text-sm whitespace-pre-wrap leading-relaxed">
-              {message.type === 'text' && (
-                <p>{message.content}</p>
-              )}
-              {message.type === 'file' && (
-                <div className="flex items-center gap-2">
-                  <span>📎</span>
-                  <span>{message.fileName}</span>
-                </div>
-              )}
-              {/* Для других типов сообщений будет использоваться специализированный рендер */}
-            </div>
+            {/* Ленивая загрузка содержимого сообщения */}
+            <Suspense fallback={<LoadingFallback theme={theme} message="Загрузка сообщения..." />}>
+              <MessageComponent
+                message={message}
+                theme={theme}
+                onAction={onAction}
+              />
+            </Suspense>
           </div>
           
           {/* Время отправки */}
           <div className="mt-1">
-            <span 
-              className="text-xs opacity-70"
+            <span
+              className="text-xs opacity-70 transition-opacity hover:opacity-100"
               style={{ color: theme.colors.text.secondary }}
             >
-              {message.timestamp.toLocaleTimeString('ru-RU', {
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
+              {formattedTime}
             </span>
           </div>
         </div>

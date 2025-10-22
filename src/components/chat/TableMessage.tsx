@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback, useMemo } from 'react';
-import { TableMessage as TableMessageType, TableColumn } from '@/types/chat';
+import { TableMessage as TableMessageType } from '@/types/chat';
 import { Theme } from '@/types/theme';
 
 interface TableMessageProps {
@@ -106,7 +106,7 @@ const TableMessage: React.FC<TableMessageProps> = memo(({ message, theme }) => {
     return sortState.direction === 'asc' ? '↑' : '↓';
   }, [sortState]);
 
-  const formatCellValue = useCallback((value: any, column: TableColumn) => {
+  const formatCellValue = useCallback((value: any) => {
     if (value === null || value === undefined) {
       return '-';
     }
@@ -220,7 +220,7 @@ const TableMessage: React.FC<TableMessageProps> = memo(({ message, theme }) => {
                       textAlign: column.align || 'left'
                     }}
                   >
-                    {formatCellValue(row[column.key], column)}
+                    {formatCellValue(row[column.key])}
                   </td>
                 ))}
               </tr>

@@ -8,10 +8,8 @@ interface TextMessageBubbleProps {
   sender: 'user' | 'agent'
 }
 
-const TextMessageBubble: React.FC<TextMessageBubbleProps> = memo(({ 
-  message, 
-  theme, 
-  sender 
+const TextMessageBubble: React.FC<TextMessageBubbleProps> = memo(({
+  message
 }) => {
   return (
     <div className="message-content">

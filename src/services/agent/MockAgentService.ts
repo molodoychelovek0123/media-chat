@@ -1,5 +1,5 @@
 import { AgentService, AgentResponse, MockAgentConfig, BusinessScenario, BusinessScenarioStep, CoffeeShopScenario } from '@/types/agent'
-import { Message, TextMessage, ReasoningMessage, FormMessage, ImageMessage, LinksMessage, TableMessage, MapMessage, ProgressMessage, ButtonGroupMessage, QuickRepliesMessage } from '@/types/chat'
+import { Message, TextMessage } from '@/types/chat'
 import { ThemeType } from '@/types/theme'
 
 export class MockAgentService implements AgentService {

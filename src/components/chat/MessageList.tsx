@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useCallback } from 'react'
+import React, { memo, useEffect, useRef, useCallback, useState } from 'react'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useChat } from '@/hooks/useChat'
 import { Message } from '@/types/chat'
@@ -6,115 +6,7 @@ import { Message } from '@/types/chat'
 // Импорт всех компонентов сообщений
 import UserMessage from './UserMessage'
 import AgentMessage from './AgentMessage'
-import TextMessage from './TextMessage'
-import CollapsibleReasoning from './CollapsibleReasoning'
-import FormMessage from './FormMessage'
-import ImageMessage from './ImageMessage'
-import LinksGallery from './LinksGallery'
-import TableMessage from './TableMessage'
-import MapMessage from './MapMessage'
-import ProgressMessage from './ProgressMessage'
-import ButtonGroup from './ButtonGroup'
-import QuickReplies from './QuickReplies'
 
-// Компонент для отображения содержимого сообщения
-const MessageContent: React.FC<{ message: Message; theme: any; onAction?: (action: any) => void }> = ({
-  message,
-  theme,
-  onAction
-}) => {
-  switch (message.type) {
-    case 'text':
-      return <TextMessage message={message} theme={theme} />
-    
-    case 'file':
-      // Используем существующий FileMessageBubble или создаем новый
-      const handleDownload = () => {
-        const link = document.createElement('a')
-        link.href = message.fileUrl
-        link.download = message.fileName
-        link.click()
-      }
-
-      const formatFileSize = (bytes: number) => {
-        if (bytes === 0) return '0 Bytes'
-        const k = 1024
-        const sizes = ['Bytes', 'KB', 'MB', 'GB']
-        const i = Math.floor(Math.log(bytes) / Math.log(k))
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
-      }
-
-      return (
-        <div className="message-content">
-          <div
-            className="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
-            style={{
-              backgroundColor: theme.colors.surface,
-              border: `1px solid ${theme.colors.border}`
-            }}
-            onClick={handleDownload}
-          >
-            <div
-              className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
-              style={{ backgroundColor: theme.colors.primary }}
-            >
-              <span className="text-white text-xs font-medium">FILE</span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <p
-                className="text-sm font-medium truncate"
-                style={{ color: theme.colors.text.primary }}
-              >
-                {message.fileName}
-              </p>
-              <p
-                className="text-xs mt-1"
-                style={{ color: theme.colors.text.secondary }}
-              >
-                {formatFileSize(message.fileSize)} • {message.mimeType}
-              </p>
-            </div>
-          </div>
-        </div>
-      )
-    
-    case 'reasoning':
-      return <CollapsibleReasoning message={message} theme={theme} />
-    
-    case 'form':
-      return <FormMessage message={message} theme={theme} onAction={onAction} />
-    
-    case 'image':
-      return <ImageMessage message={message} theme={theme} />
-    
-    case 'links':
-      return <LinksGallery message={message} theme={theme} />
-    
-    case 'table':
-      return <TableMessage message={message} theme={theme} />
-    
-    case 'map':
-      return <MapMessage message={message} theme={theme} />
-    
-    case 'progress':
-      return <ProgressMessage message={message} theme={theme} />
-    
-    case 'button-group':
-      return <ButtonGroup message={message} theme={theme} onAction={onAction} />
-    
-    case 'quick-replies':
-      return <QuickReplies message={message} theme={theme} onAction={onAction} />
-    
-    default:
-      return (
-        <div className="message-content">
-          <p className="text-sm text-red-500">
-            Неизвестный тип сообщения: {message.type}
-          </p>
-        </div>
-      )
-  }
-}
 
 // Основной компонент MessageList
 const MessageList: React.FC = memo(() => {
@@ -122,6 +14,7 @@ const MessageList: React.FC = memo(() => {
   const { messages, isTyping } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [visibleMessages, setVisibleMessages] = useState<Set<string>>(new Set())
 
   // Автоматическая прокрутка к последнему сообщению
   const scrollToBottom = useCallback(() => {
@@ -132,34 +25,64 @@ const MessageList: React.FC = memo(() => {
     scrollToBottom()
   }, [messages, scrollToBottom])
 
+  // Добавляем новые сообщения в видимые с анимацией
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1]
+    if (lastMessage && !visibleMessages.has(lastMessage.id)) {
+      const timer = setTimeout(() => {
+        setVisibleMessages(prev => new Set([...prev, lastMessage.id]))
+      }, 50)
+      return () => clearTimeout(timer)
+    }
+  }, [messages, visibleMessages])
+
   // Обработчик для отображения разных типов сообщений
-  const renderMessage = useCallback((message: Message) => {
+  const renderMessage = useCallback((message: Message, index: number) => {
     const handleAction = (action: any) => {
       // Обработка действий от компонентов (кнопки, формы, быстрые ответы)
       console.log('Action received:', action)
       // Здесь можно добавить логику обработки действий
     }
 
+    const isVisible = visibleMessages.has(message.id)
+    const animationDelay = Math.min(index * 100, 500) // Максимальная задержка 500ms
+
     // Используем разные компоненты для пользователя и агента
     if (message.sender === 'user') {
       return (
-        <UserMessage
+        <div
           key={message.id}
-          message={message}
-          theme={theme}
-        />
+          className={`message-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          style={{
+            animationDelay: `${animationDelay}ms`,
+            transition: 'opacity 0.3s ease-in-out'
+          }}
+        >
+          <UserMessage
+            message={message}
+            theme={theme}
+          />
+        </div>
       )
     } else {
       return (
-        <AgentMessage
+        <div
           key={message.id}
-          message={message}
-          theme={theme}
-          onAction={handleAction}
-        />
+          className={`message-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          style={{
+            animationDelay: `${animationDelay}ms`,
+            transition: 'opacity 0.3s ease-in-out'
+          }}
+        >
+          <AgentMessage
+            message={message}
+            theme={theme}
+            onAction={handleAction}
+          />
+        </div>
       )
     }
-  }, [theme])
+  }, [theme, visibleMessages])
 
   return (
     <div 
@@ -192,34 +115,44 @@ const MessageList: React.FC = memo(() => {
         </div>
       ) : (
         <div className="space-y-2">
-          {messages.map(renderMessage)}
+          {messages.map((message, index) => renderMessage(message, index))}
           
           {/* Индикатор печатающего агента */}
           {isTyping && (
-            <div className="flex justify-start mb-4">
+            <div className="flex justify-start mb-4 message-fade-in">
               <div
-                className="max-w-[70%] rounded-2xl p-4 rounded-bl-md"
+                className="max-w-[70%] rounded-2xl p-4 rounded-bl-md hover-lift"
                 style={{
                   backgroundColor: theme.colors.surface,
-                  color: theme.colors.text.primary
+                  color: theme.colors.text.primary,
+                  border: `1px solid ${theme.colors.border}`
                 }}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <div className="flex gap-1">
-                    <div 
-                      className="w-2 h-2 rounded-full animate-pulse"
+                    <div
+                      className="w-2 h-2 rounded-full typing-bounce"
                       style={{ backgroundColor: theme.colors.primary }}
                     />
-                    <div 
-                      className="w-2 h-2 rounded-full animate-pulse"
-                      style={{ backgroundColor: theme.colors.primary }}
+                    <div
+                      className="w-2 h-2 rounded-full typing-bounce"
+                      style={{
+                        backgroundColor: theme.colors.primary,
+                        animationDelay: '200ms'
+                      }}
                     />
-                    <div 
-                      className="w-2 h-2 rounded-full animate-pulse"
-                      style={{ backgroundColor: theme.colors.primary }}
+                    <div
+                      className="w-2 h-2 rounded-full typing-bounce"
+                      style={{
+                        backgroundColor: theme.colors.primary,
+                        animationDelay: '400ms'
+                      }}
                     />
                   </div>
-                  <span className="text-sm">Агент печатает...</span>
+                  <span className="text-sm font-medium">Агент печатает...</span>
+                </div>
+                <div className="mt-2 text-xs opacity-70">
+                  Обрабатываю ваш запрос
                 </div>
               </div>
             </div>

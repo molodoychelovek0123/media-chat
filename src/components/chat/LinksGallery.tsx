@@ -34,7 +34,7 @@ const LinksGallery: React.FC<LinksGalleryProps> = memo(({ message, theme }) => {
     }
   }, []);
 
-  const renderLinkItem = useCallback((link: LinkItem, index: number) => {
+  const renderLinkItem = useCallback((link: LinkItem) => {
     const domain = link.domain || extractDomain(link.url);
     const faviconUrl = getFaviconUrl(link.url);
 

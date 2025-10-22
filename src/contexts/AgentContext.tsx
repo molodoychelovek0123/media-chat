@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react'
 import { AgentService, AgentResponse, CoffeeShopScenario } from '@/types/agent'
 import { MockAgentService } from '@/services/agent/MockAgentService'
 import { Message } from '@/types/chat'
@@ -6,8 +6,6 @@ import { useTheme } from './ThemeContext'
 
 interface AgentContextType {
   agentService: AgentService
-  isAgentTyping: boolean
-  agentResponse: AgentResponse | null
   currentScenario: CoffeeShopScenario
   updateScenarioData: (data: Partial<CoffeeShopScenario['userData']>) => void
   setScenarioTheme: (theme: string) => void
@@ -22,8 +20,6 @@ interface AgentProviderProps {
 
 export const AgentProvider: React.FC<AgentProviderProps> = ({ children }) => {
   const { setBusinessMode, toggleTheme } = useTheme()
-  const [isAgentTyping, setIsAgentTyping] = useState(false)
-  const [agentResponse, setAgentResponse] = useState<AgentResponse | null>(null)
   const [currentScenario, setCurrentScenario] = useState<CoffeeShopScenario>({
     currentStep: 0,
     userData: {},
@@ -85,8 +81,6 @@ export const AgentProvider: React.FC<AgentProviderProps> = ({ children }) => {
 
   const value = {
     agentService,
-    isAgentTyping,
-    agentResponse,
     currentScenario,
     updateScenarioData,
     setScenarioTheme,
