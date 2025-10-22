@@ -6,8 +6,8 @@ const Header: React.FC = () => {
   const { theme } = useTheme()
 
   return (
-    <header 
-      className="flex justify-between items-center fixed top-0 left-0 right-0 z-50"
+    <header
+      className="sdds-header flex justify-between items-center fixed top-0 left-0 right-0 z-50"
       style={{
         backgroundColor: theme.colors.surface,
         borderBottom: `1px solid ${theme.colors.border}`,
@@ -16,8 +16,8 @@ const Header: React.FC = () => {
       }}
     >
       <div className="flex items-center">
-        <h1 
-          className="text-xl font-semibold"
+        <h1
+          className="sdds-heading-1 text-xl font-semibold"
           style={{ color: theme.colors.text.primary }}
         >
           BCP AI Консультант

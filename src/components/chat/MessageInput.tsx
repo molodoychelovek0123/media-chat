@@ -101,7 +101,7 @@ const MessageInput: React.FC = memo(() => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 gpu-accelerated"
+      className="sdds-message-input p-4 gpu-accelerated"
       style={{
         backgroundColor: theme.colors.surface
       }}
@@ -115,39 +115,39 @@ const MessageInput: React.FC = memo(() => {
         type="file"
         onChange={handleFileInputChange}
         accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.txt,.xls,.xlsx"
-        className="hidden"
+        className="sdds-input-file hidden"
       />
 
       {/* Индикатор перетаскивания файла */}
       {isDragging && (
         <div
-          className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10 rounded-lg form-transition"
+          className="sdds-dropzone-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10 rounded-lg form-transition"
           style={{
             backgroundColor: 'rgba(0, 0, 0, 0.7)'
           }}
         >
           <div
-            className="text-center p-6 rounded-lg hover-lift"
+            className="sdds-dropzone-card text-center p-6 rounded-lg hover-lift"
             style={{
               backgroundColor: theme.colors.surface,
               color: theme.colors.text.primary,
               border: `2px dashed ${theme.colors.primary}`
             }}
           >
-            <div className="text-3xl mb-3 animate-bounce">📁</div>
-            <p className="font-medium text-lg">Отпустите файл для загрузки</p>
-            <p className="text-sm opacity-70 mt-1">Поддерживаются: изображения, PDF, документы</p>
+            <div className="sdds-dropzone-icon text-3xl mb-3 animate-bounce">📁</div>
+            <p className="sdds-heading-2 font-medium text-lg">Отпустите файл для загрузки</p>
+            <p className="sdds-paragraph text-sm opacity-70 mt-1">Поддерживаются: изображения, PDF, документы</p>
           </div>
         </div>
       )}
 
-      <div className="flex gap-3 items-end">
+      <div className="sdds-input-container flex gap-3 items-end">
         {/* Кнопка загрузки файла */}
         <button
           type="button"
           onClick={triggerFileInput}
           disabled={isLoading}
-          className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center scale-press hover-lift form-transition disabled:opacity-50"
+          className="sdds-button sdds-button--secondary sdds-button--icon flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center scale-press hover-lift form-transition disabled:opacity-50"
           style={{
             backgroundColor: theme.colors.background,
             border: `1px solid ${theme.colors.border}`,
@@ -156,11 +156,11 @@ const MessageInput: React.FC = memo(() => {
           }}
           title="Загрузить файл"
         >
-          <span className="text-lg transition-transform hover:scale-110">📎</span>
+          <span className="sdds-icon text-lg transition-transform hover:scale-110">📎</span>
         </button>
 
         {/* Поле ввода сообщения */}
-        <div className="flex-1 relative">
+        <div className="sdds-textarea-container flex-1 relative">
           <textarea
             ref={textareaRef}
             value={message}
@@ -170,7 +170,7 @@ const MessageInput: React.FC = memo(() => {
             onBlur={() => setIsFocused(false)}
             placeholder={isLoading ? "Обработка запроса..." : "Введите ваше сообщение..."}
             disabled={isLoading}
-            className="w-full resize-none rounded-lg px-4 py-3 focus:outline-none form-transition disabled:opacity-50"
+            className="sdds-textarea w-full resize-none rounded-lg px-4 py-3 focus:outline-none form-transition disabled:opacity-50"
             style={{
               backgroundColor: theme.colors.background,
               color: theme.colors.text.primary,
@@ -185,13 +185,13 @@ const MessageInput: React.FC = memo(() => {
           {/* Подсказка для перетаскивания файлов */}
           {message.length === 0 && !isFocused && (
             <div
-              className="absolute inset-0 flex items-center justify-center pointer-events-none form-transition"
+              className="sdds-input-hint absolute inset-0 flex items-center justify-center pointer-events-none form-transition"
               style={{
                 color: theme.colors.text.secondary,
                 opacity: isDragging ? 0 : 0.5
               }}
             >
-              <span className="text-sm">или перетащите файл сюда</span>
+              <span className="sdds-paragraph text-sm">или перетащите файл сюда</span>
             </div>
           )}
         </div>
@@ -200,7 +200,7 @@ const MessageInput: React.FC = memo(() => {
         <button
           type="submit"
           disabled={!canSendMessage}
-          className="px-6 py-3 rounded-lg font-medium scale-press hover-lift form-transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="sdds-button sdds-button--primary px-6 py-3 rounded-lg font-medium scale-press hover-lift form-transition disabled:opacity-50 disabled:cursor-not-allowed"
           style={{
             backgroundColor: canSendMessage ? theme.colors.primary : theme.colors.border,
             color: '#FFFFFF',
@@ -208,14 +208,14 @@ const MessageInput: React.FC = memo(() => {
           }}
         >
           {isLoading ? (
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span className="font-medium">...</span>
+            <div className="sdds-button-content flex items-center gap-2">
+              <div className="sdds-spinner w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span className="sdds-button-text font-medium">...</span>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Отправить</span>
-              <span className="text-xs opacity-80">↵</span>
+            <div className="sdds-button-content flex items-center gap-2">
+              <span className="sdds-button-text font-medium">Отправить</span>
+              <span className="sdds-shortcut text-xs opacity-80">↵</span>
             </div>
           )}
         </button>
@@ -223,7 +223,7 @@ const MessageInput: React.FC = memo(() => {
 
       {/* Информация о поддерживаемых файлах */}
       <div
-        className="text-xs mt-3 text-center form-transition"
+        className="sdds-input-info text-xs mt-3 text-center form-transition"
         style={{
           color: theme.colors.text.secondary,
           opacity: isFocused ? 0.7 : 0.5

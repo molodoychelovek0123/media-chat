@@ -91,7 +91,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           '--theme-text-secondary': theme.colors.text.secondary,
           '--theme-border': theme.colors.border,
         } as React.CSSProperties}
-        className="theme-transition"
+        className={`theme-transition ${isBusinessMode ? 'sdds-bizcom-business' : 'sdds-bizcom-standard'}`}
       >
         {children}
       </div>

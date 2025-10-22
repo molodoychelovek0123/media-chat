@@ -259,3 +259,185 @@ html, body {
   font-weight: 600;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
+
+/* SDDS-BizCom compatibility classes */
+.sdds-bizcom-business {
+  /* Бизнес-режим стили */
+  --sdds-business-accent: var(--theme-primary);
+  --sdds-business-background: var(--theme-background);
+}
+
+.sdds-bizcom-standard {
+  /* Стандартный режим стили */
+  --sdds-standard-accent: var(--theme-primary);
+  --sdds-standard-background: var(--theme-background);
+}
+
+/* SDDS компоненты */
+.sdds-header {
+  font-family: var(--plasma-typo-font-family, 'Inter', 'Roboto', sans-serif);
+}
+
+.sdds-heading-1 {
+  font-family: var(--plasma-typo-font-family, 'Inter', 'Roboto', sans-serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.sdds-heading-2 {
+  font-family: var(--plasma-typo-font-family, 'Inter', 'Roboto', sans-serif);
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+.sdds-paragraph {
+  font-family: var(--plasma-typo-font-family, 'Inter', 'Roboto', sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.sdds-button {
+  font-family: var(--plasma-typo-font-family, 'Inter', 'Roboto', sans-serif);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.sdds-button--primary {
+  background-color: var(--theme-primary);
+  color: white;
+  border: none;
+}
+
+.sdds-button--secondary {
+  background-color: var(--theme-background);
+  color: var(--theme-text-primary);
+  border: 1px solid var(--theme-border);
+}
+
+.sdds-button--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sdds-badge {
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+}
+
+.sdds-badge--success {
+  background-color: var(--theme-primary);
+  color: white;
+}
+
+.sdds-card {
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sdds-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sdds-spinner {
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.sdds-input-file {
+  display: none;
+}
+
+.sdds-textarea {
+  font-family: var(--plasma-typo-font-family, 'Inter', 'Roboto', sans-serif);
+  border-radius: 0.5rem;
+  resize: none;
+}
+
+.sdds-dropzone-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.sdds-dropzone-card {
+  border: 2px dashed var(--theme-primary);
+  border-radius: 0.75rem;
+}
+
+.sdds-dropzone-icon {
+  font-size: 1.875rem;
+}
+
+.sdds-input-hint {
+  color: var(--theme-text-secondary);
+  pointer-events: none;
+}
+
+.sdds-input-info {
+  color: var(--theme-text-secondary);
+  font-size: 0.75rem;
+}
+
+.sdds-icon {
+  font-size: 1.125rem;
+}
+
+.sdds-shortcut {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* SDDS контейнеры */
+.sdds-chat-container {
+  font-family: var(--plasma-typo-font-family, 'Inter', 'Roboto', sans-serif);
+}
+
+.sdds-chat-header {
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.sdds-chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sdds-chat-messages {
+  flex: 1;
+  overflow: hidden;
+}
+
+.sdds-chat-input-area {
+  border-top: 1px solid var(--theme-border);
+}
+
+.sdds-message-input {
+  background-color: var(--theme-surface);
+}
+
+.sdds-input-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.sdds-textarea-container {
+  flex: 1;
+  position: relative;
+}
+
+.sdds-button-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sdds-button-text {
+  font-weight: 500;
+}

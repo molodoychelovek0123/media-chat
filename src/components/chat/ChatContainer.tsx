@@ -11,7 +11,7 @@ const ChatContainer: React.FC = memo(() => {
 
   return (
     <div
-      className="flex flex-col h-screen w-full theme-transition"
+      className="sdds-chat-container flex flex-col h-screen w-full theme-transition"
       style={{
         backgroundColor: theme.colors.background,
         color: theme.colors.text.primary,
@@ -20,7 +20,7 @@ const ChatContainer: React.FC = memo(() => {
     >
       {/* Header Area */}
       <div
-        className="px-6 py-4 border-b theme-transition"
+        className="sdds-chat-header px-6 py-4 border-b theme-transition"
         style={{
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
@@ -29,13 +29,13 @@ const ChatContainer: React.FC = memo(() => {
       >
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold theme-transition" style={{
+            <h1 className="sdds-heading-1 text-xl font-semibold theme-transition" style={{
               color: theme.colors.text.primary,
               transition: 'color var(--theme-transition)'
             }}>
               BCP AI Консультант
             </h1>
-            <p className="text-sm mt-1 theme-transition" style={{
+            <p className="sdds-paragraph text-sm mt-1 theme-transition" style={{
               color: theme.colors.text.secondary,
               transition: 'color var(--theme-transition)'
             }}>
@@ -44,7 +44,7 @@ const ChatContainer: React.FC = memo(() => {
           </div>
           {isBusinessMode && (
             <div
-              className="px-3 py-1 rounded-full text-xs font-medium theme-transition"
+              className="sdds-badge sdds-badge--success px-3 py-1 rounded-full text-xs font-medium theme-transition"
               style={{
                 backgroundColor: theme.colors.primary,
                 color: theme.colors.text.inverse,
@@ -58,10 +58,10 @@ const ChatContainer: React.FC = memo(() => {
       </div>
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="sdds-chat-main flex-1 flex flex-col overflow-hidden">
         {/* Messages Container */}
         <div
-          className="flex-1 overflow-hidden theme-transition"
+          className="sdds-chat-messages flex-1 overflow-hidden theme-transition"
           style={{
             backgroundColor: theme.colors.background,
             transition: 'background-color var(--theme-transition)'
@@ -75,7 +75,7 @@ const ChatContainer: React.FC = memo(() => {
 
         {/* Message Input Area */}
         <div
-          className="border-t theme-transition"
+          className="sdds-chat-input-area border-t theme-transition"
           style={{
             borderColor: theme.colors.border,
             backgroundColor: theme.colors.surface,
@@ -89,14 +89,14 @@ const ChatContainer: React.FC = memo(() => {
       {/* Loading Overlay */}
       {isLoading && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 theme-transition"
+          className="sdds-overlay fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 theme-transition"
           style={{
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             transition: 'background-color var(--theme-transition)'
           }}
         >
           <div
-            className="rounded-lg p-6 text-center theme-transition"
+            className="sdds-card rounded-lg p-6 text-center theme-transition"
             style={{
               backgroundColor: theme.colors.surface,
               color: theme.colors.text.primary,
@@ -104,13 +104,13 @@ const ChatContainer: React.FC = memo(() => {
             }}
           >
             <div
-              className="animate-spin rounded-full h-8 w-8 border-b-2 mx-auto mb-3 theme-transition"
+              className="sdds-spinner animate-spin rounded-full h-8 w-8 border-b-2 mx-auto mb-3 theme-transition"
               style={{
                 borderColor: theme.colors.primary,
                 transition: 'border-color var(--theme-transition)'
               }}
             />
-            <p className="text-sm">Обработка запроса...</p>
+            <p className="sdds-paragraph text-sm">Обработка запроса...</p>
           </div>
         </div>
       )}
