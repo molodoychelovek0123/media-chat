@@ -21,8 +21,9 @@ const CollapsibleReasoning: React.FC<CollapsibleReasoningProps> = memo(({
     setTimeout(() => setIsAnimating(false), 300);
   }, []);
 
-  const formatTimestamp = useCallback((timestamp: Date) => {
-    return timestamp.toLocaleTimeString('ru-RU', {
+  const formatTimestamp = useCallback((timestamp: Date | string) => {
+    const date = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
+    return date.toLocaleTimeString('ru-RU', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit'

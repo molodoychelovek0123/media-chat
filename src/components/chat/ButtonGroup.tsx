@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import { ButtonGroupMessage, ButtonItem } from '@/types/chat';
 import { Theme } from '@/types/theme';
+import { Button } from '@/components/sdds-imports';
 
 interface ButtonGroupProps {
   message: ButtonGroupMessage;
@@ -47,29 +48,18 @@ const ButtonGroup: React.FC<ButtonGroupProps> = memo(({
         }`}
       >
         {message.buttons.map((button, index) => (
-          <button
+          <Button
             key={button.id}
             onClick={() => handleButtonClick(button)}
             disabled={button.disabled}
-            className={`px-6 py-4 rounded-xl text-sm font-medium scale-press hover-lift form-transition disabled:opacity-50 disabled:cursor-not-allowed ${
-              message.layout === 'vertical' ? 'w-full' : ''
-            }`}
-            style={{
-              backgroundColor:
-                button.variant === 'primary' ? theme.colors.primary :
-                button.variant === 'secondary' ? theme.colors.surface :
-                button.variant === 'outline' ? 'transparent' : theme.colors.primary,
-              color:
-                button.variant === 'outline' ? theme.colors.primary :
-                button.variant === 'secondary' ? theme.colors.text.primary :
-                '#FFFFFF',
-              border:
-                button.variant === 'outline' ? `2px solid ${theme.colors.primary}` :
-                button.variant === 'secondary' ? `2px solid ${theme.colors.border}` :
-                'none',
-              boxShadow: button.disabled ? 'none' : '0 6px 20px rgba(0, 0, 0, 0.15)',
-              animationDelay: `${index * 50}ms`
-            }}
+            view={
+              button.variant === 'primary' ? 'default' :
+              button.variant === 'secondary' ? 'secondary' :
+              button.variant === 'outline' ? 'clear' : 'default'
+            }
+            size="l"
+            stretch={message.layout === 'vertical'}
+            style={{ animationDelay: `${index * 50}ms` }}
             aria-label={button.label}
             title={button.disabled ? 'Недоступно' : button.label}
           >
@@ -95,7 +85,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = memo(({
                 <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
               )}
             </div>
-          </button>
+          </Button>
         ))}
       </div>
 

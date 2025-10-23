@@ -70,18 +70,12 @@ const AgentMessage: React.FC<AgentMessageProps> = memo(({
         >
           AI
         </div>
-        
+
         {/* Контейнер сообщения */}
         <div className="flex flex-col flex-1">
           {/* Пузырек сообщения с улучшенными анимациями */}
           <div
             className="rounded-2xl px-4 py-3 shadow-lg hover-lift form-transition"
-            style={{
-              backgroundColor: theme.colors.surface,
-              color: theme.colors.text.primary,
-              border: `1px solid ${theme.colors.border}`,
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-            }}
           >
             {/* Ленивая загрузка содержимого сообщения */}
             <Suspense fallback={<LoadingFallback theme={theme} message="Загрузка сообщения..." />}>
@@ -92,7 +86,7 @@ const AgentMessage: React.FC<AgentMessageProps> = memo(({
               />
             </Suspense>
           </div>
-          
+
           {/* Время отправки */}
           <div className="mt-1">
             <span

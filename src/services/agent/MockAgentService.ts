@@ -386,9 +386,25 @@ export class MockAgentService implements AgentService {
           this.config.onThemeChange('green')
         }
 
-        // Убираем автоматический переход к форме - пусть пользователь сам переходит
-        // Это исправит проблему с поиском последующих шагов
         console.log('🎯 Пользователь выбрал бизнес-режим, показываем reasoning');
+        
+        // После reasoning автоматически переходим к форме сбора данных
+        // Это исправит проблему с прерыванием сценария
+        console.log('🔄 Автоматический переход к форме после reasoning');
+        const formStep = this.currentScenario.steps[3]; // Шаг 4 - форма для сбора информации о локации
+        
+        if (formStep) {
+          const formMessage = this.createAgentMessage(formStep)
+          return {
+            message: formStep.response,
+            type: 'text',
+            actions: formStep.actions,
+            metadata: {
+              messageType: formMessage.type,
+              messageData: formMessage
+            }
+          }
+        }
       }
 
       // Создаем сообщение агента

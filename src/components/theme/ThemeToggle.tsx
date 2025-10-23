@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTheme } from '@contexts/ThemeContext'
+import { Button } from '@/components/sdds-imports'
 
 const ThemeToggle: React.FC = () => {
   const { currentTheme, toggleTheme } = useTheme()
@@ -10,26 +11,14 @@ const ThemeToggle: React.FC = () => {
   }
 
   return (
-    <button
+    <Button
       onClick={handleToggle}
-      className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
-      style={{
-        backgroundColor: 'transparent',
-        border: `1px solid ${currentTheme === 'purple' ? '#8B5CF6' : '#10B981'}`,
-        color: currentTheme === 'purple' ? '#8B5CF6' : '#10B981'
-      }}
+      view="secondary"
+      size="s"
       aria-label={`Переключить тему на ${currentTheme === 'purple' ? 'зеленую' : 'фиолетовую'}`}
     >
-      <span className="text-sm font-medium">
-        {currentTheme === 'purple' ? 'Фиолетовая' : 'Зеленая'}
-      </span>
-      <div 
-        className="w-4 h-4 rounded-full"
-        style={{
-          backgroundColor: currentTheme === 'purple' ? '#8B5CF6' : '#10B981'
-        }}
-      />
-    </button>
+      {currentTheme === 'purple' ? '🌙 Фиолетовая' : '☀️ Зеленая'}
+    </Button>
   )
 }
 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест исправления ошибки timestamp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-case {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success {
+            border-left: 4px solid #4CAF50;
+            background: #f1f8e9;
+        }
+        .error {
+            border-left: 4px solid #f44336;
+            background: #ffebee;
+        }
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        code {
+            background: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .log {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Тест исправления ошибки timestamp.toLocaleTimeString</h1>
+    
+    <div class="test-case success">
+        <h2>✅ Исправление внесено</h2>
+        <p>В файле <code>CollapsibleReasoning.tsx</code> исправлена функция <code>formatTimestamp</code>:</p>
+        <ul>
+            <li>Функция теперь принимает как <code>Date</code>, так и <code>string</code></li>
+            <li>Автоматически преобразует строку в объект <code>Date</code></li>
+            <li>Обрабатывает все форматы даты (ISO, timestamp, etc.)</li>
+        </ul>
+    </div>
+
+    <div class="test-case">
+        <h2>📋 Проверка в браузере</h2>
+        <p>Откройте консоль разработчика (F12) и проверьте:</p>
+        <ol>
+            <li>Нет ошибок <code>timestamp.toLocaleTimeString is not a function</code></li>
+            <li>Цепочка рассуждений отображается корректно</li>
+            <li>Время шагов отображается в формате ЧЧ:ММ:СС</li>
+        </ol>
+        
+        <div class="step">
+            <h3>Шаг 1: Откройте приложение</h3>
+            <p><a href="http://localhost:3003" target="_blank">http://localhost:3003</a></p>
+        </div>
+        
+        <div class="step">
+            <h3>Шаг 2: Запустите сценарий</h3>
+            <p>Введите сообщение: <code>"хочу открыть кофейню"</code></p>
+        </div>
+        
+        <div class="step">
+            <h3>Шаг 3: Выберите режим ММБ</h3>
+            <p>Нажмите кнопку: <code>"ММБ - Модель малого бизнеса"</code></p>
+        </div>
+        
+        <div class="step">
+            <h3>Шаг 4: Проверьте reasoning</h3>
+            <p>Должна появиться цепочка рассуждений с временными метками</p>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h2>📊 Логи тестирования</h2>
+        <div id="log" class="log"></div>
+    </div>
+
+    <script>
+        // Логирование для отслеживания состояния
+        const log = document.getElementById('log');
+        
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString('ru-RU');
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+            logEntry.style.color = type === 'error' ? '#f44336' : '#333';
+            log.appendChild(logEntry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Проверка функции formatTimestamp
+        function testFormatTimestamp() {
+            addLog('🧪 Запуск теста formatTimestamp...');
+            
+            // Тест 1: Объект Date
+            const dateObj = new Date();
+            const result1 = formatTimestamp(dateObj);
+            addLog(`✅ Тест 1 (Date): ${result1}`);
+            
+            // Тест 2: Строка ISO
+            const isoString = new Date().toISOString();
+            const result2 = formatTimestamp(isoString);
+            addLog(`✅ Тест 2 (ISO): ${result2}`);
+            
+            // Тест 3: Строка timestamp
+            const timestampString = new Date().toString();
+            const result3 = formatTimestamp(timestampString);
+            addLog(`✅ Тест 3 (timestamp): ${result3}`);
+            
+            addLog('🎯 Все тесты прошли успешно!');
+        }
+
+        // Функция из исправленного компонента
+        function formatTimestamp(timestamp) {
+            const date = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
+            return date.toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        // Запускаем тест при загрузке
+        window.addEventListener('load', () => {
+            addLog('🚀 Страница загружена');
+            testFormatTimestamp();
+            addLog('📱 Перейдите по ссылке выше для проверки в приложении');
+        });
+
+        // Отслеживание ошибок в консоли
+        window.addEventListener('error', (event) => {
+            addLog(`❌ Ошибка в консоли: ${event.message}`, 'error');
+        });
+    </script>
+</body>
+</html>

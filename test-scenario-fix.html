@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест исправления перехода от reasoning к форме</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-case {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success {
+            border-left: 4px solid #4CAF50;
+            background: #f1f8e9;
+        }
+        .error {
+            border-left: 4px solid #f44336;
+            background: #ffebee;
+        }
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        code {
+            background: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Тест исправления перехода от reasoning к форме</h1>
+    
+    <div class="test-case">
+        <h2>📋 Сценарий тестирования</h2>
+        
+        <div class="step">
+            <h3>Шаг 1: Инициализация сценария</h3>
+            <p><strong>Пользователь:</strong> <code>"хочу открыть кофейню"</code></p>
+            <p><strong>Ожидаемый результат:</strong> Агент предлагает выбрать режим консультации</p>
+        </div>
+        
+        <div class="step">
+            <h3>Шаг 2: Выбор режима ММБ</h3>
+            <p><strong>Пользователь:</strong> <code>"ММБ"</code></p>
+            <p><strong>Ожидаемый результат:</strong> Показывается цепочка рассуждений (reasoning)</p>
+        </div>
+        
+        <div class="step">
+            <h3>Шаг 3: Автоматический переход к форме</h3>
+            <p><strong>Ожидаемый результат:</strong> После reasoning автоматически показывается форма для сбора данных о локации</p>
+            <p><strong>Проверка:</strong> Должна появиться форма с полями: Город, Тип локации, Бюджет, Конкуренция</p>
+        </div>
+    </div>
+    
+    <div class="test-case success">
+        <h2>✅ Исправление внесено</h2>
+        <p>В <code>MockAgentService.ts</code> добавлена логика автоматического перехода от reasoning к форме:</p>
+        <ul>
+            <li>После выбора бизнес-режима (ММБ/КБ) показывается reasoning</li>
+            <li>Затем автоматически переходим к шагу 4 (форма сбора данных о локации)</li>
+            <li>Добавлены логи для отслеживания перехода</li>
+        </ul>
+    </div>
+    
+    <div class="test-case">
+        <h2>🔍 Инструкция по тестированию</h2>
+        <ol>
+            <li>Откройте приложение по адресу: <code>http://localhost:5173</code></li>
+            <li>Откройте консоль разработчика (F12 → Console)</li>
+            <li>Введите сообщение: <code>"хочу открыть кофейню"</code></li>
+            <li>Нажмите кнопку <code>"ММБ - Модель малого бизнеса"</code></li>
+            <li>Проверьте, что после reasoning автоматически показывается форма</li>
+            <li>В консоли должны появиться логи: <code>"🔄 Автоматический переход к форме после reasoning"</code></li>
+        </ol>
+    </div>
+    
+    <div class="test-case">
+        <h2>📝 Ожидаемые логи в консоли</h2>
+        <pre>
+📤 Получено сообщение: "хочу открыть кофейню"
+🔍 Поиск шага для сообщения: "хочу открыть кофейню"
+  Шаг 0: триггер "/.*кофе.*/i" -> СОВПАЛ
+✅ Найден шаг 0: Отлично! Я готов помочь вам с открытием кофейни! 🎯...
+
+📤 Получено сообщение: "ММБ"
+🔍 Поиск шага для сообщения: "ММБ"
+  Шаг 0: триггер "/.*кофе.*/i" -> не совпал
+  Шаг 1: триггер "/.*ммб.*/i" -> СОВПАЛ
+✅ Найден шаг 1: Отличный выбор! Давайте перейдем к детальному анализу...
+🎯 Пользователь выбрал бизнес-режим, показываем reasoning
+🔄 Автоматический переход к форме после reasoning
+        </pre>
+    </div>
+</body>
+</html>

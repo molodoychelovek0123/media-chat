@@ -1,6 +1,7 @@
 import React, { memo, useState, useCallback, useMemo } from 'react';
 import { FormMessage as FormMessageType, FormField } from '@/types/chat';
 import { Theme } from '@/types/theme';
+import { Button, TextArea } from '@/components/sdds-imports';
 
 interface FormMessageProps {
   message: FormMessageType;
@@ -154,15 +155,18 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
 
       case 'textarea':
         return (
-          <textarea
+          <TextArea
             {...commonProps}
-            rows={4}
+            size="l"
+            resize="vertical"
           />
         );
 
       case 'select':
         return (
-          <select {...commonProps}>
+          <select
+            {...commonProps}
+          >
             <option value="">Выберите вариант</option>
             {field.options?.map(option => (
               <option key={option.value} value={option.value}>
@@ -180,17 +184,9 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
               id={field.id}
               checked={!!value}
               onChange={(e) => handleFieldChange(field.id, e.target.checked)}
-              className="w-4 h-4 rounded border-gray-300 focus:ring-blue-500"
-              style={{
-                backgroundColor: theme.colors.background,
-                borderColor: theme.colors.border
-              }}
+              className="w-4 h-4"
             />
-            <label
-              htmlFor={field.id}
-              className="text-sm"
-              style={{ color: theme.colors.text.primary }}
-            >
+            <label htmlFor={field.id} className="text-sm">
               {field.label}
             </label>
           </div>
@@ -208,17 +204,9 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
                   value={option.value}
                   checked={value === option.value}
                   onChange={(e) => handleFieldChange(field.id, e.target.value)}
-                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  style={{
-                    backgroundColor: theme.colors.background,
-                    borderColor: theme.colors.border
-                  }}
+                  className="w-4 h-4"
                 />
-                <label
-                  htmlFor={`${field.id}-${option.value}`}
-                  className="text-sm"
-                  style={{ color: theme.colors.text.primary }}
-                >
+                <label htmlFor={`${field.id}-${option.value}`} className="text-sm">
                   {option.label}
                 </label>
               </div>
@@ -235,12 +223,6 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
               min={field.validation?.min || 0}
               max={field.validation?.max || 100}
               step={field.validation?.step || 1}
-              className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-              style={{
-                backgroundColor: theme.colors.background,
-                color: theme.colors.text.primary,
-                borderColor: showError ? '#EF4444' : theme.colors.border,
-              }}
             />
             <div className="flex justify-between text-xs" style={{ color: theme.colors.text.secondary }}>
               <span>{field.validation?.min || 0}</span>
@@ -341,27 +323,15 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
 
         {/* Кнопка отправки */}
         <div className="pt-2">
-          <button
+          <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full px-4 py-3 rounded-lg text-sm font-medium scale-press hover-lift form-transition disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{
-              backgroundColor: theme.colors.primary,
-              color: '#FFFFFF',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-            }}
+            view="default"
+            size="l"
+            stretch
           >
-            {isSubmitting ? (
-              <div className="flex items-center justify-center gap-2">
-                <div
-                  className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"
-                />
-                Отправка...
-              </div>
-            ) : (
-              message.submitLabel || 'Отправить'
-            )}
-          </button>
+            {isSubmitting ? 'Отправка...' : message.submitLabel || 'Отправить'}
+          </Button>
         </div>
       </form>
 

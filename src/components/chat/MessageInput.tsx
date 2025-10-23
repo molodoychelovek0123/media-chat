@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, memo, useMemo } from 'react'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useChat } from '@/hooks/useChat'
+import { Button, TextArea } from '@/components/sdds-imports'
 
 const MessageInput: React.FC = memo(() => {
   const { theme } = useTheme()
@@ -143,26 +144,20 @@ const MessageInput: React.FC = memo(() => {
 
       <div className="sdds-input-container flex gap-3 items-end">
         {/* Кнопка загрузки файла */}
-        <button
+        <Button
           type="button"
           onClick={triggerFileInput}
           disabled={isLoading}
-          className="sdds-button sdds-button--secondary sdds-button--icon flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center scale-press hover-lift form-transition disabled:opacity-50"
-          style={{
-            backgroundColor: theme.colors.background,
-            border: `1px solid ${theme.colors.border}`,
-            color: theme.colors.text.primary,
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
-          }}
+          view="secondary"
+          size="l"
           title="Загрузить файл"
         >
-          <span className="sdds-icon text-lg transition-transform hover:scale-110">📎</span>
-        </button>
+          📎
+        </Button>
 
         {/* Поле ввода сообщения */}
-        <div className="sdds-textarea-container flex-1 relative">
-          <textarea
-            ref={textareaRef}
+        <div className="sdds-textarea-container flex-1">
+          <TextArea
             value={message}
             onChange={handleTextareaChange}
             onKeyPress={handleKeyPress}
@@ -170,55 +165,24 @@ const MessageInput: React.FC = memo(() => {
             onBlur={() => setIsFocused(false)}
             placeholder={isLoading ? "Обработка запроса..." : "Введите ваше сообщение..."}
             disabled={isLoading}
-            className="sdds-textarea w-full resize-none rounded-lg px-4 py-3 focus:outline-none form-transition disabled:opacity-50"
+            size="l"
+            resize="vertical"
             style={{
-              backgroundColor: theme.colors.background,
-              color: theme.colors.text.primary,
-              border: `1px solid ${isFocused ? theme.colors.primary : theme.colors.border}`,
               minHeight: '48px',
-              maxHeight: '120px',
-              boxShadow: isFocused ? `0 0 0 2px ${theme.colors.primary}20` : 'none'
+              maxHeight: '120px'
             }}
-            rows={1}
           />
-          
-          {/* Подсказка для перетаскивания файлов */}
-          {message.length === 0 && !isFocused && (
-            <div
-              className="sdds-input-hint absolute inset-0 flex items-center justify-center pointer-events-none form-transition"
-              style={{
-                color: theme.colors.text.secondary,
-                opacity: isDragging ? 0 : 0.5
-              }}
-            >
-              <span className="sdds-paragraph text-sm">или перетащите файл сюда</span>
-            </div>
-          )}
         </div>
 
         {/* Кнопка отправки */}
-        <button
+        <Button
           type="submit"
           disabled={!canSendMessage}
-          className="sdds-button sdds-button--primary px-6 py-3 rounded-lg font-medium scale-press hover-lift form-transition disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{
-            backgroundColor: canSendMessage ? theme.colors.primary : theme.colors.border,
-            color: '#FFFFFF',
-            boxShadow: canSendMessage ? '0 4px 12px rgba(0, 0, 0, 0.15)' : 'none'
-          }}
+          view="default"
+          size="l"
         >
-          {isLoading ? (
-            <div className="sdds-button-content flex items-center gap-2">
-              <div className="sdds-spinner w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span className="sdds-button-text font-medium">...</span>
-            </div>
-          ) : (
-            <div className="sdds-button-content flex items-center gap-2">
-              <span className="sdds-button-text font-medium">Отправить</span>
-              <span className="sdds-shortcut text-xs opacity-80">↵</span>
-            </div>
-          )}
-        </button>
+          {isLoading ? '...' : '📤 Отправить'}
+        </Button>
       </div>
 
       {/* Информация о поддерживаемых файлах */}

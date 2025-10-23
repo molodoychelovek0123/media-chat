@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react'
 import { Theme, ThemeType } from '@/types/theme'
 import { PURPLE_THEME, GREEN_THEME } from '@/constants/themes'
+import { PlasmaThemeProvider } from '@/components/theme/PlasmaThemeProvider'
 
 interface ThemeContextType {
   theme: Theme
@@ -81,20 +82,24 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={value}>
-      <div
-        style={{
-          '--theme-transition': theme.transitions.normal,
-          '--theme-primary': theme.colors.primary,
-          '--theme-background': theme.colors.background,
-          '--theme-surface': theme.colors.surface,
-          '--theme-text-primary': theme.colors.text.primary,
-          '--theme-text-secondary': theme.colors.text.secondary,
-          '--theme-border': theme.colors.border,
-        } as React.CSSProperties}
-        className={`theme-transition ${isBusinessMode ? 'sdds-bizcom-business' : 'sdds-bizcom-standard'}`}
+      <PlasmaThemeProvider
+        theme={currentTheme === 'purple' ? 'cms_dark' : 'sbl_dark'}
       >
-        {children}
-      </div>
+        <div
+          style={{
+            '--theme-transition': theme.transitions.normal,
+            '--theme-primary': theme.colors.primary,
+            '--theme-background': theme.colors.background,
+            '--theme-surface': theme.colors.surface,
+            '--theme-text-primary': theme.colors.text.primary,
+            '--theme-text-secondary': theme.colors.text.secondary,
+            '--theme-border': theme.colors.border,
+          } as React.CSSProperties}
+          className="theme-transition"
+        >
+          {children}
+        </div>
+      </PlasmaThemeProvider>
     </ThemeContext.Provider>
   )
 }
