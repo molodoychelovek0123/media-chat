@@ -63,12 +63,15 @@ export const AgentProvider: React.FC<AgentProviderProps> = ({ children }) => {
   }, [agentService, toggleTheme, setBusinessMode])
 
   const processAgentResponse = useCallback((response: AgentResponse): Message | null => {
+    console.log('Processing agent response:', response); // Отладка
+    
     if (response.metadata?.messageData) {
+      console.log('Using messageData from metadata:', response.metadata.messageData); // Отладка
       return response.metadata.messageData as Message
     }
 
     // Создаем стандартное текстовое сообщение
-    return {
+    const textMessage = {
       id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       type: 'text',
       content: response.message,
@@ -77,6 +80,9 @@ export const AgentProvider: React.FC<AgentProviderProps> = ({ children }) => {
       status: 'sent',
       format: 'plain'
     } as Message
+    
+    console.log('Created fallback text message:', textMessage); // Отладка
+    return textMessage;
   }, [])
 
   const value = {

@@ -75,11 +75,10 @@ const CollapsibleReasoning: React.FC<CollapsibleReasoningProps> = memo(({
             </p>
           </div>
         </div>
-        
+
         <div
-          className={`transform collapse-transition ${
-            isCollapsed ? 'rotate-0' : 'rotate-180'
-          }`}
+          className={`transform collapse-transition ${isCollapsed ? 'rotate-0' : 'rotate-180'
+            }`}
         >
           <svg
             width="16"
@@ -97,9 +96,8 @@ const CollapsibleReasoning: React.FC<CollapsibleReasoningProps> = memo(({
 
       {/* Содержимое цепочки рассуждений с плавной анимацией */}
       <div
-        className={`collapse-transition ${
-          isCollapsed ? 'max-h-0 opacity-0' : 'max-h-96 opacity-100'
-        }`}
+        className={`collapse-transition ${isCollapsed ? 'max-h-0 opacity-0' : 'max-h-96 opacity-100'
+          }`}
         style={{
           overflow: 'hidden'
         }}
@@ -115,7 +113,7 @@ const CollapsibleReasoning: React.FC<CollapsibleReasoningProps> = memo(({
             {message.steps.map((step, index) => (
               <div
                 key={step.id}
-                className="flex gap-3 p-3 rounded-lg hover-lift form-transition"
+                className="flex gap-3 p-3 mb-3 rounded-lg hover-lift form-transition"
                 style={{
                   backgroundColor: theme.colors.surface,
                   animationDelay: `${index * 50}ms`
@@ -131,7 +129,7 @@ const CollapsibleReasoning: React.FC<CollapsibleReasoningProps> = memo(({
                 >
                   {index + 1}
                 </div>
-                
+
                 {/* Содержимое шага */}
                 <div className="flex-1 min-w-0">
                   <p
@@ -140,7 +138,7 @@ const CollapsibleReasoning: React.FC<CollapsibleReasoningProps> = memo(({
                   >
                     {step.content}
                   </p>
-                  
+
                   {/* Время шага */}
                   <div className="mt-2">
                     <span
