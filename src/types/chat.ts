@@ -45,7 +45,7 @@ export interface FormMessage extends BaseMessage {
 
 export interface FormField {
   id: string;
-  type: 'text' | 'email' | 'number' | 'select' | 'textarea' | 'checkbox';
+  type: 'text' | 'email' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'range';
   label: string;
   placeholder?: string;
   required?: boolean;
@@ -54,6 +54,7 @@ export interface FormField {
     pattern?: RegExp;
     min?: number;
     max?: number;
+    step?: number;
   };
 }
 

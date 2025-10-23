@@ -55,7 +55,7 @@ const MessageList: React.FC = memo(() => {
       return (
         <div
           key={message.id}
-          className={`message-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`message-fade-in user-message ${isVisible ? 'opacity-100' : 'opacity-0'}`}
           style={{
             animationDelay: `${animationDelay}ms`,
             transition: 'opacity 0.3s ease-in-out'
@@ -96,12 +96,12 @@ const MessageList: React.FC = memo(() => {
       }}
     >
       {messages.length === 0 ? (
-        <div 
+        <div
           className="flex items-center justify-center h-full text-center"
           style={{ color: theme.colors.text.secondary }}
         >
           <div className="max-w-md">
-            <div 
+            <div
               className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
               style={{ backgroundColor: theme.colors.primary }}
             >
@@ -111,7 +111,7 @@ const MessageList: React.FC = memo(() => {
               Добро пожаловать в BCP AI Консультант
             </h3>
             <p className="text-sm leading-relaxed">
-              Я помогу вам с вопросами открытия бизнеса. Начните диалог, чтобы получить 
+              Я помогу вам с вопросами открытия бизнеса. Начните диалог, чтобы получить
               пошаговую консультацию по всем этапам создания вашего дела.
             </p>
           </div>
@@ -119,7 +119,7 @@ const MessageList: React.FC = memo(() => {
       ) : (
         <div className="space-y-2">
           {messages.map((message, index) => renderMessage(message, index))}
-          
+
           {/* Индикатор печатающего агента */}
           {isTyping && (
             <div className="flex justify-start mb-4 message-fade-in">
@@ -160,7 +160,7 @@ const MessageList: React.FC = memo(() => {
               </div>
             </div>
           )}
-          
+
           {/* Элемент для автоматической прокрутки */}
           <div ref={messagesEndRef} />
         </div>

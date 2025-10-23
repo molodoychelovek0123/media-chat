@@ -186,13 +186,67 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
                 borderColor: theme.colors.border
               }}
             />
-            <label 
+            <label
               htmlFor={field.id}
               className="text-sm"
               style={{ color: theme.colors.text.primary }}
             >
               {field.label}
             </label>
+          </div>
+        );
+
+      case 'radio':
+        return (
+          <div className="space-y-2">
+            {field.options?.map((option) => (
+              <div key={option.value} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  id={`${field.id}-${option.value}`}
+                  name={field.id}
+                  value={option.value}
+                  checked={value === option.value}
+                  onChange={(e) => handleFieldChange(field.id, e.target.value)}
+                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  style={{
+                    backgroundColor: theme.colors.background,
+                    borderColor: theme.colors.border
+                  }}
+                />
+                <label
+                  htmlFor={`${field.id}-${option.value}`}
+                  className="text-sm"
+                  style={{ color: theme.colors.text.primary }}
+                >
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        );
+
+      case 'range':
+        return (
+          <div className="space-y-2">
+            <input
+              {...commonProps}
+              type="range"
+              min={field.validation?.min || 0}
+              max={field.validation?.max || 100}
+              step={field.validation?.step || 1}
+              className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+              style={{
+                backgroundColor: theme.colors.background,
+                color: theme.colors.text.primary,
+                borderColor: showError ? '#EF4444' : theme.colors.border,
+              }}
+            />
+            <div className="flex justify-between text-xs" style={{ color: theme.colors.text.secondary }}>
+              <span>{field.validation?.min || 0}</span>
+              <span>Текущее значение: {value}</span>
+              <span>{field.validation?.max || 100}</span>
+            </div>
           </div>
         );
 

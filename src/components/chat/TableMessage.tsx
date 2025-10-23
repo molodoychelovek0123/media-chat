@@ -106,7 +106,7 @@ const TableMessage: React.FC<TableMessageProps> = memo(({ message, theme }) => {
     return sortState.direction === 'asc' ? '↑' : '↓';
   }, [sortState]);
 
-  const formatCellValue = useCallback((value: any) => {
+  const formatCellValue = useCallback((value: any, columnKey?: string) => {
     if (value === null || value === undefined) {
       return '-';
     }
@@ -116,6 +116,26 @@ const TableMessage: React.FC<TableMessageProps> = memo(({ message, theme }) => {
     }
 
     if (typeof value === 'number') {
+      // Форматирование валюты для финансовых столбцов
+      if (columnKey?.includes('amount') || columnKey?.includes('price') || columnKey?.includes('cost')) {
+        return new Intl.NumberFormat('ru-RU', {
+          style: 'currency',
+          currency: 'RUB',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(value);
+      }
+      
+      // Форматирование процентов
+      if (columnKey?.includes('percent') || columnKey?.includes('rate') || columnKey?.includes('margin')) {
+        return `${value}%`;
+      }
+      
+      // Форматирование месяцев для окупаемости
+      if (columnKey?.includes('month') || columnKey?.includes('окупаемость')) {
+        return `${value} мес.`;
+      }
+      
       return new Intl.NumberFormat('ru-RU').format(value);
     }
 
@@ -217,10 +237,11 @@ const TableMessage: React.FC<TableMessageProps> = memo(({ message, theme }) => {
                     style={{
                       color: theme.colors.text.primary,
                       borderColor: theme.colors.border,
-                      textAlign: column.align || 'left'
+                      textAlign: column.align || 'left',
+                      fontWeight: column.key.includes('total') || column.key.includes('итого') ? '600' : 'normal'
                     }}
                   >
-                    {formatCellValue(row[column.key])}
+                    {formatCellValue(row[column.key], column.key)}
                   </td>
                 ))}
               </tr>
@@ -301,8 +322,8 @@ const TableMessage: React.FC<TableMessageProps> = memo(({ message, theme }) => {
 
       {/* Информация о таблице */}
       <div className="mt-3">
-        <div 
-          className="flex items-center gap-2 text-xs px-2 py-1 rounded"
+        <div
+          className="flex items-center gap-2 text-xs px-2 py-1 rounded form-transition hover-lift"
           style={{
             backgroundColor: theme.colors.background,
             color: theme.colors.text.secondary
@@ -324,6 +345,25 @@ const TableMessage: React.FC<TableMessageProps> = memo(({ message, theme }) => {
           )}
         </div>
       </div>
+
+      {/* Дополнительная информация для финансовых таблиц */}
+      {message.title?.toLowerCase().includes('финанс') && (
+        <div className="mt-2">
+          <div
+            className="flex items-center gap-2 text-xs px-2 py-1 rounded"
+            style={{
+              backgroundColor: '#F0F9FF',
+              color: '#0369A1',
+              border: `1px solid #BAE6FD`
+            }}
+          >
+            <span>💡</span>
+            <span>
+              Данные основаны на средних показателях рынка и могут отличаться в зависимости от конкретной локации
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 });

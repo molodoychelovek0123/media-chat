@@ -40,7 +40,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = memo(({
     <div className="button-group gpu-accelerated">
       {/* Группа кнопок */}
       <div
-        className={`flex gap-2 ${
+        className={`flex gap-3 ${
           message.layout === 'vertical'
             ? 'flex-col'
             : 'flex-row flex-wrap'
@@ -51,7 +51,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = memo(({
             key={button.id}
             onClick={() => handleButtonClick(button)}
             disabled={button.disabled}
-            className={`px-4 py-3 rounded-lg text-sm font-medium scale-press hover-lift form-transition disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`px-6 py-4 rounded-xl text-sm font-medium scale-press hover-lift form-transition disabled:opacity-50 disabled:cursor-not-allowed ${
               message.layout === 'vertical' ? 'w-full' : ''
             }`}
             style={{
@@ -64,16 +64,30 @@ const ButtonGroup: React.FC<ButtonGroupProps> = memo(({
                 button.variant === 'secondary' ? theme.colors.text.primary :
                 '#FFFFFF',
               border:
-                button.variant === 'outline' ? `1px solid ${theme.colors.primary}` :
-                button.variant === 'secondary' ? `1px solid ${theme.colors.border}` :
+                button.variant === 'outline' ? `2px solid ${theme.colors.primary}` :
+                button.variant === 'secondary' ? `2px solid ${theme.colors.border}` :
                 'none',
-              boxShadow: button.disabled ? 'none' : '0 4px 12px rgba(0, 0, 0, 0.15)',
+              boxShadow: button.disabled ? 'none' : '0 6px 20px rgba(0, 0, 0, 0.15)',
               animationDelay: `${index * 50}ms`
             }}
             aria-label={button.label}
             title={button.disabled ? 'Недоступно' : button.label}
           >
             <div className="flex items-center justify-center gap-2">
+              {/* Иконки для бизнес-режимов */}
+              {button.label.includes('ММБ') && (
+                <span className="text-base">🏢</span>
+              )}
+              {button.label.includes('КБ') && (
+                <span className="text-base">💼</span>
+              )}
+              {button.label.includes('счет') && button.variant === 'primary' && (
+                <span className="text-base">💳</span>
+              )}
+              {button.label.includes('счет') && button.variant === 'secondary' && (
+                <span className="text-base">⏸️</span>
+              )}
+              
               {button.label}
               
               {/* Индикатор загрузки для disabled кнопок */}
@@ -103,6 +117,28 @@ const ButtonGroup: React.FC<ButtonGroupProps> = memo(({
           <span>Выберите подходящий вариант</span>
         </div>
       </div>
+
+      {/* Дополнительная информация для бизнес-режимов */}
+      {message.buttons.some(btn =>
+        btn.label.includes('ММБ') || btn.label.includes('КБ')
+      ) && (
+        <div className="mt-3">
+          <div
+            className="flex items-center gap-2 text-xs px-3 py-2 rounded"
+            style={{
+              backgroundColor: '#F0F9FF',
+              color: '#0369A1',
+              border: `1px solid #BAE6FD`
+            }}
+          >
+            <span>🎯</span>
+            <span>
+              <strong>ММБ</strong> - Модель малого бизнеса (автоматизированный анализ)<br/>
+              <strong>КБ</strong> - Консалтинг бизнеса (детальная консультация)
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Подсказка для пользователя */}
       {hasDisabledButtons && (

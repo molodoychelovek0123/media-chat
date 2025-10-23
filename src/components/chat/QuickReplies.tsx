@@ -46,11 +46,11 @@ const QuickReplies: React.FC<QuickRepliesProps> = memo(({
   const hasMoreSuggestions = message.suggestions.length > (message.maxVisible || 3);
 
   return (
-    <div className="quick-replies">
+    <div className="quick-replies gpu-accelerated">
       {/* Заголовок быстрых ответов */}
       <div className="mb-3">
-        <p 
-          className="text-sm font-medium mb-2"
+        <p
+          className="text-sm font-medium mb-2 hover-lift"
           style={{ color: theme.colors.text.primary }}
         >
           Быстрые ответы:
@@ -144,13 +144,36 @@ const QuickReplies: React.FC<QuickRepliesProps> = memo(({
 
       {/* Подсказка для пользователя */}
       <div className="mt-2">
-        <p 
-          className="text-xs italic"
-          style={{ color: theme.colors.text.secondary }}
+        <p
+          className="text-xs italic transition-opacity hover:opacity-100"
+          style={{ color: theme.colors.text.secondary, opacity: 0.7 }}
         >
           💡 Эти предложения помогут продолжить диалог
         </p>
       </div>
+
+      {/* Дополнительная информация для бизнес-сценария */}
+      {message.suggestions.some(suggestion =>
+        suggestion.toLowerCase().includes('финанс') ||
+        suggestion.toLowerCase().includes('анализ') ||
+        suggestion.toLowerCase().includes('риск')
+      ) && (
+        <div className="mt-2">
+          <div
+            className="flex items-center gap-2 text-xs px-2 py-1 rounded"
+            style={{
+              backgroundColor: '#F0F9FF',
+              color: '#0369A1',
+              border: `1px solid #BAE6FD`
+            }}
+          >
+            <span>🎯</span>
+            <span>
+              Выберите тип анализа для детального изучения вашего проекта
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Стили для анимации пульсации */}
       <style>{`

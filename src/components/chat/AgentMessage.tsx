@@ -12,6 +12,7 @@ const LazyProgressMessage = React.lazy(() => import('./ProgressMessage'));
 const LazyCollapsibleReasoning = React.lazy(() => import('./CollapsibleReasoning'));
 const LazyButtonGroup = React.lazy(() => import('./ButtonGroup'));
 const LazyLinksGallery = React.lazy(() => import('./LinksGallery'));
+const LazyMapMessage = React.lazy(() => import('./MapMessage'));
 
 interface AgentMessageProps {
   message: Message;
@@ -29,6 +30,7 @@ const MessageComponents: Record<string, React.ComponentType<any>> = {
   reasoning: LazyCollapsibleReasoning,
   'button-group': LazyButtonGroup,
   links: LazyLinksGallery,
+  map: LazyMapMessage,
 };
 
 const AgentMessage: React.FC<AgentMessageProps> = memo(({

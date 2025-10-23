@@ -44,7 +44,7 @@ const UserMessage: React.FC<UserMessageProps> = memo(({ message, theme }) => {
               {/* Для других типов сообщений будет использоваться специализированный рендер */}
             </div>
           </div>
-          
+
           {/* Время отправки */}
           <div className="mt-1">
             <span

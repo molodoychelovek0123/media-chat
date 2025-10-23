@@ -53,9 +53,8 @@ const AgentStatus: React.FC = memo(() => {
 
   return (
     <div
-      className={`px-6 py-4 border-t form-transition gpu-accelerated ${
-        isTyping ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-      }`}
+      className={`px-6 py-4 border-t form-transition gpu-accelerated ${isTyping ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+        }`}
       style={{
         backgroundColor: theme.colors.surface,
         borderColor: theme.colors.border,
@@ -85,9 +84,8 @@ const AgentStatus: React.FC = memo(() => {
               {[0, 1, 2].map((index) => (
                 <div
                   key={index}
-                  className={`w-2.5 h-2.5 rounded-full form-transition ${
-                    isTyping ? 'typing-bounce' : 'opacity-30'
-                  }`}
+                  className={`w-2.5 h-2.5 rounded-full form-transition ${isTyping ? 'typing-bounce' : 'opacity-30'
+                    }`}
                   style={{
                     backgroundColor: theme.colors.primary,
                     animationDelay: `${index * 150}ms`,
@@ -100,7 +98,7 @@ const AgentStatus: React.FC = memo(() => {
               {statusText}
             </span>
           </div>
-          
+
           {/* Дополнительная информация */}
           <p className="text-xs mt-2 opacity-70 transition-opacity hover:opacity-100">
             Обрабатываю ваш запрос...

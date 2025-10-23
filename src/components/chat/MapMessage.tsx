@@ -5,9 +5,10 @@ import { Theme } from '@/types/theme';
 interface MapMessageProps {
   message: MapMessageType;
   theme: Theme;
+  onAction?: (action: any) => void;
 }
 
-const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
+const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme, onAction }) => {
   const [selectedMarker, setSelectedMarker] = useState<MapMarker | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -25,12 +26,12 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
       zoom: zoom.toString(),
       size: '600x400',
       scale: '2',
-      key: 'YOUR_API_KEY' // В реальном приложении нужно использовать переменную окружения
+      key: 'YOUR_API_KEY' // Замените на реальный API ключ Google Maps
     });
 
     // Добавляем маркеры
     markers.forEach((marker, index) => {
-      const markerColor = marker.color || 'red';
+      const markerColor = marker.color || '#10B981'; // Зеленый по умолчанию для бизнес-темы
       const markerLabel = marker.icon || String.fromCharCode(65 + index); // A, B, C, ...
       
       params.append('markers', `color:${markerColor}|label:${markerLabel}|${marker.position.lat},${marker.position.lng}`);
@@ -43,6 +44,21 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
 
     return `${baseUrl}?${params.toString()}`;
   }, [message]);
+
+  // Функция для выбора локации
+  const handleLocationSelect = useCallback((marker: MapMarker) => {
+    if (onAction) {
+      onAction({
+        type: 'location-select',
+        payload: {
+          locationId: marker.id,
+          locationName: marker.title,
+          coordinates: marker.position,
+          description: marker.description
+        }
+      });
+    }
+  }, [onAction]);
 
   const handleMarkerClick = useCallback((marker: MapMarker) => {
     setSelectedMarker(marker);
@@ -110,17 +126,17 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
           {message.markers.map((marker, index) => (
             <button
               key={marker.id}
-              className={`absolute transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-125 ${
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-125 scale-press ${
                 selectedMarker?.id === marker.id ? 'scale-125 z-10' : 'z-0'
               }`}
               style={{
-                backgroundColor: marker.color || '#EF4444',
+                backgroundColor: marker.color || theme.colors.primary,
                 color: '#FFFFFF',
                 left: `${50 + (marker.position.lng - message.center.lng) * 1000}%`,
                 top: `${50 - (marker.position.lat - message.center.lat) * 1000}%`,
-                boxShadow: selectedMarker?.id === marker.id 
+                boxShadow: selectedMarker?.id === marker.id
                   ? `0 0 0 3px ${theme.colors.primary}`
-                  : '0 2px 4px rgba(0,0,0,0.3)'
+                  : '0 2px 8px rgba(0,0,0,0.4)'
               }}
               onClick={() => handleMarkerClick(marker)}
               aria-label={`Маркер: ${marker.title}`}
@@ -134,7 +150,7 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
         <div className="absolute top-3 right-3 flex flex-col gap-2">
           <button
             onClick={handleFullscreenToggle}
-            className="w-8 h-8 rounded-full flex items-center justify-center bg-white bg-opacity-90 hover:bg-opacity-100 transition-all duration-200 shadow-lg"
+            className="w-8 h-8 rounded-full flex items-center justify-center bg-white bg-opacity-90 hover:bg-opacity-100 transition-all duration-200 shadow-lg hover-lift scale-press"
             aria-label={isFullscreen ? 'Выйти из полноэкранного режима' : 'Открыть в полноэкранном режиме'}
           >
             {isFullscreen ? '⤓' : '⤢'}
@@ -142,7 +158,7 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
 
           <button
             onClick={handleOpenInMaps}
-            className="w-8 h-8 rounded-full flex items-center justify-center bg-white bg-opacity-90 hover:bg-opacity-100 transition-all duration-200 shadow-lg"
+            className="w-8 h-8 rounded-full flex items-center justify-center bg-white bg-opacity-90 hover:bg-opacity-100 transition-all duration-200 shadow-lg hover-lift scale-press"
             aria-label="Открыть в Google Maps"
           >
             ↗
@@ -151,15 +167,16 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
 
         {/* Попап с информацией о маркере */}
         {selectedMarker && (
-          <div 
-            className="marker-popup absolute bottom-4 left-4 right-4 p-4 rounded-lg shadow-lg z-20"
+          <div
+            className="marker-popup absolute bottom-4 left-4 right-4 p-4 rounded-lg shadow-lg z-20 form-transition"
             style={{
               backgroundColor: theme.colors.surface,
-              border: `1px solid ${theme.colors.border}`
+              border: `1px solid ${theme.colors.border}`,
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
             }}
           >
-            <div className="flex items-start justify-between mb-2">
-              <h4 
+            <div className="flex items-start justify-between mb-3">
+              <h4
                 className="text-sm font-semibold"
                 style={{ color: theme.colors.text.primary }}
               >
@@ -167,7 +184,7 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
               </h4>
               <button
                 onClick={handleClosePopup}
-                className="w-6 h-6 rounded-full flex items-center justify-center text-xs hover:opacity-70 transition-opacity"
+                className="w-6 h-6 rounded-full flex items-center justify-center text-xs hover:opacity-70 transition-opacity hover-lift"
                 style={{
                   backgroundColor: theme.colors.background,
                   color: theme.colors.text.primary
@@ -179,21 +196,35 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
             </div>
             
             {selectedMarker.description && (
-              <p 
-                className="text-sm"
+              <p
+                className="text-sm mb-3"
                 style={{ color: theme.colors.text.secondary }}
               >
                 {selectedMarker.description}
               </p>
             )}
             
-            <div className="mt-2">
-              <span 
+            <div className="flex items-center justify-between">
+              <span
                 className="text-xs"
                 style={{ color: theme.colors.text.secondary }}
               >
                 Координаты: {selectedMarker.position.lat.toFixed(6)}, {selectedMarker.position.lng.toFixed(6)}
               </span>
+              
+              {/* Кнопка выбора локации */}
+              {message.interactive && onAction && (
+                <button
+                  onClick={() => handleLocationSelect(selectedMarker)}
+                  className="px-3 py-1 rounded text-xs font-medium scale-press hover-lift"
+                  style={{
+                    backgroundColor: theme.colors.primary,
+                    color: '#FFFFFF'
+                  }}
+                >
+                  Выбрать локацию
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -231,9 +262,33 @@ const MapMessage: React.FC<MapMessageProps> = memo(({ message, theme }) => {
         </div>
       </div>
 
+      {/* Информация о карте */}
+      <div className="mt-3">
+        <div
+          className="flex items-center gap-2 text-xs px-2 py-1 rounded form-transition hover-lift"
+          style={{
+            backgroundColor: theme.colors.background,
+            color: theme.colors.text.secondary
+          }}
+        >
+          <span>🗺️</span>
+          <span>
+            Карта с {message.markers.length} маркер{message.markers.length === 1 ? 'ом' : 'ами'}
+          </span>
+          <span>•</span>
+          <span>Центр: {message.center.lat.toFixed(4)}, {message.center.lng.toFixed(4)}</span>
+          {message.interactive && (
+            <>
+              <span>•</span>
+              <span>Интерактивная</span>
+            </>
+          )}
+        </div>
+      </div>
+
       {/* Предупреждение об API ключе */}
       <div className="mt-2">
-        <div 
+        <div
           className="flex items-center gap-2 text-xs px-2 py-1 rounded"
           style={{
             backgroundColor: '#FEF3CD',

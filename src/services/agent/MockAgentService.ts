@@ -5,7 +5,6 @@ import { ThemeType } from '@/types/theme'
 export class MockAgentService implements AgentService {
   private currentScenario: BusinessScenario
   private coffeeShopScenario: CoffeeShopScenario
-  private step: number = 0
   private _isTyping: boolean = false
 
   constructor(private config: MockAgentConfig) {
@@ -20,82 +19,84 @@ export class MockAgentService implements AgentService {
   private createBusinessScenario(): BusinessScenario {
     return {
       steps: [
-        // Начало сценария - выбор режима
+        // Шаг 1: Инициализация сценария
         {
-          trigger: /.*кофейн.*|.*кафе.*|.*кофе.*/i,
-          response: "Отлично! Открытие кофейни - прекрасная идея! 🎯\n\nДавайте выберем подходящий режим консультации:",
+          trigger: /.*кофе.*/i,
+          response: "Отлично! Я готов помочь вам с открытием кофейни! 🎯\n\nДавайте выберем подходящий режим консультации:",
           actions: [
             { type: 'button', label: 'ММБ - Модель малого бизнеса', payload: 'mmb' },
             { type: 'button', label: 'КБ - Консалтинг бизнеса', payload: 'kb' }
           ]
         },
-        // Выбор режима ММБ
+        // Шаг 2: Выбор режима ММБ
         {
           trigger: /.*ммб.*/i,
-          response: "Отличный выбор! Модель малого бизнеса идеально подходит для старта кофейни. 🚀\n\nДавайте перейдем к детальному анализу вашего проекта.",
+          response: "Отличный выбор! Давайте перейдем к детальному анализу вашего проекта.",
           messageType: 'reasoning',
           messageData: {
             steps: [
               {
                 id: '1',
-                content: 'Пользователь выбрал ММБ режим для открытия кофейни',
+                content: 'Пользователь выбрал бизнес-режим консультации',
                 timestamp: new Date()
               },
               {
                 id: '2',
-                content: 'ММБ подходит для проектов с инвестициями до 5 млн рублей',
+                content: 'Активируем бизнес-тему оформления',
                 timestamp: new Date()
               },
               {
                 id: '3',
-                content: 'Начинаем анализ ключевых параметров бизнеса',
+                content: 'Начинаем сбор данных о локации кофейни',
                 timestamp: new Date()
               }
-            ]
+            ],
+            isCollapsed: false
           }
         },
-        // Выбор режима КБ
+        // Шаг 3: Выбор режима КБ
         {
           trigger: /.*кб.*/i,
-          response: "Консалтинг бизнеса выбран! Этот режим подходит для более масштабных проектов. 📊\n\nПриступим к комплексному анализу.",
+          response: "Отличный выбор! Давайте перейдем к детальному анализу вашего проекта.",
           messageType: 'reasoning',
           messageData: {
             steps: [
               {
                 id: '1',
-                content: 'Пользователь выбрал КБ режим для открытия кофейни',
+                content: 'Пользователь выбрал бизнес-режим консультации',
                 timestamp: new Date()
               },
               {
                 id: '2',
-                content: 'КБ подходит для проектов с инвестициями от 5 млн рублей',
+                content: 'Активируем бизнес-тему оформления',
                 timestamp: new Date()
               },
               {
                 id: '3',
-                content: 'Начинаем детальный анализ всех аспектов бизнеса',
+                content: 'Начинаем сбор данных о локации кофейни',
                 timestamp: new Date()
               }
-            ]
+            ],
+            isCollapsed: false
           }
         },
-        // Сбор данных о локации
+        // Шаг 4: Форма для сбора информации о локации
         {
-          trigger: /.*локаци.*|.*местоположен.*|.*город.*/i,
-          response: "Понял! Локация - ключевой фактор успеха кофейни. 🗺️\n\nПожалуйста, укажите планируемое местоположение:",
+          trigger: /.*локация.*|.*город.*|.*местоположение.*/i,
+          response: "Понял! Давайте соберем информацию о локации вашей будущей кофейни.",
           messageType: 'form',
           messageData: {
-            title: 'Информация о локации',
+            title: 'Информация о локации кофейни',
             fields: [
               {
-                id: 'location',
+                id: 'city',
                 type: 'text',
-                label: 'Город/Район',
-                placeholder: 'Например: Москва, центр',
+                label: 'Город',
+                placeholder: 'В каком городе планируете открыть кофейню?',
                 required: true
               },
               {
-                id: 'areaType',
+                id: 'locationType',
                 type: 'select',
                 label: 'Тип локации',
                 options: [
@@ -108,6 +109,16 @@ export class MockAgentService implements AgentService {
                 required: true
               },
               {
+                id: 'budget',
+                type: 'range',
+                label: 'Бюджет на открытие (млн руб)',
+                validation: {
+                  min: 1,
+                  max: 10,
+                  step: 0.5
+                }
+              },
+              {
                 id: 'competition',
                 type: 'textarea',
                 label: 'Конкуренция в районе',
@@ -117,83 +128,77 @@ export class MockAgentService implements AgentService {
             submitLabel: 'Продолжить анализ'
           }
         },
-        // Финансовый анализ
+        // Шаг 5: Пошаговый сбор данных - вопрос о городе
         {
-          trigger: /.*бюджет.*|.*инвестици.*|.*финанс.*/i,
-          response: "Переходим к финансовому планированию. 💰\n\nДавайте рассчитаем основные показатели:",
+          trigger: /.*город.*|.*москва.*|.*санкт-петербург.*|.*екатеринбург.*/i,
+          response: "В каком городе вы планируете открыть кофейню?",
+          messageType: 'text'
+        },
+        // Шаг 6: Пошаговый сбор данных - вопрос о типе локации
+        {
+          trigger: /.*тип.*|.*локация.*|.*район.*/i,
+          response: "Какой тип локации вас интересует?",
+          messageType: 'quick-replies',
+          messageData: {
+            suggestions: [
+              'Деловой центр',
+              'Торговый центр',
+              'Улица с пешеходным трафиком',
+              'Жилой район',
+              'Университетский район'
+            ],
+            maxVisible: 5
+          }
+        },
+        // Шаг 7: Пошаговый сбор данных - вопрос о конкурентах
+        {
+          trigger: /.*конкуренты.*|.*соперники.*|.*конкуренция.*/i,
+          response: "Расскажите о конкурентах в этом районе?",
+          messageType: 'text'
+        },
+        // Шаг 8: Уведомление о заполнении формы
+        {
+          trigger: /.*готово.*|.*заполнено.*|.*собрано.*/i,
+          response: "Отлично! Мы собрали всю необходимую информацию о локации. 🎉\n\nТеперь давайте выберем тип анализа:",
+          messageType: 'quick-replies',
+          messageData: {
+            suggestions: [
+              'Финансовый анализ',
+              'Анализ конкурентов',
+              'Анализ рисков',
+              'SWOT-анализ'
+            ],
+            maxVisible: 4
+          }
+        },
+        // Шаг 9: Финансовый анализ
+        {
+          trigger: /.*финанс.*|.*бюджет.*|.*инвестици.*/i,
+          response: "Переходим к финансовому планированию. 💰",
           messageType: 'table',
           messageData: {
             title: 'Финансовый план кофейни (первый год)',
             columns: [
-              { key: 'category', label: 'Категория', align: 'left' },
-              { key: 'amount', label: 'Сумма (руб)', align: 'right' },
-              { key: 'description', label: 'Описание', align: 'left' }
+              { key: 'category', label: 'Категория', align: 'left', sortable: true },
+              { key: 'amount', label: 'Сумма', align: 'right', sortable: true },
+              { key: 'description', label: 'Описание', align: 'left' },
+              { key: 'percent', label: 'Доля в бюджете', align: 'right', sortable: true }
             ],
             data: [
-              { category: 'Стартовые инвестиции', amount: '2,500,000', description: 'Ремонт, оборудование, мебель' },
-              { category: 'Ежемесячные расходы', amount: '350,000', description: 'Аренда, зарплаты, сырье' },
-              { category: 'Прогноз выручки', amount: '600,000', description: 'При 200 клиентах в день' },
-              { category: 'Чистая прибыль', amount: '250,000', description: 'После всех расходов' },
-              { category: 'Окупаемость', amount: '10 месяцев', description: 'Срок возврата инвестиций' }
-            ]
-          }
-        },
-        // Визуализация планировки
-        {
-          trigger: /.*план.*|.*дизайн.*|.*интерьер.*/i,
-          response: "Отличная идея! Планировка кофейни влияет на эффективность работы. 🏗️\n\nВот пример оптимальной планировки:",
-          messageType: 'image',
-          messageData: {
-            imageUrl: 'https://via.placeholder.com/600x400/10B981/FFFFFF?text=Планировка+кофейни',
-            altText: 'Пример планировки кофейни',
-            caption: 'Оптимальная планировка на 40-50 посадочных мест',
-            width: 600,
-            height: 400
-          }
-        },
-        // Полезные ресурсы
-        {
-          trigger: /.*ресурс.*|.*ссылки.*|.*помощь.*/i,
-          response: "Вот полезные ресурсы для открытия кофейни: 📚",
-          messageType: 'links',
-          messageData: {
-            title: 'Полезные материалы',
-            links: [
-              {
-                id: '1',
-                title: 'Бизнес-план кофейни',
-                url: 'https://example.com/business-plan',
-                description: 'Подробный шаблон бизнес-плана',
-                domain: 'example.com'
-              },
-              {
-                id: '2',
-                title: 'Руководство по выбору оборудования',
-                url: 'https://example.com/equipment',
-                description: 'Как выбрать кофемашину и другое оборудование',
-                domain: 'example.com'
-              },
-              {
-                id: '3',
-                title: 'Маркетинг для кофейни',
-                url: 'https://example.com/marketing',
-                description: 'Стратегии продвижения в соцсетях',
-                domain: 'example.com'
-              },
-              {
-                id: '4',
-                title: 'Юридические аспекты',
-                url: 'https://example.com/legal',
-                description: 'Регистрация бизнеса и лицензии',
-                domain: 'example.com'
-              }
+              { category: 'Стартовые инвестиции', amount: 2500000, description: 'Ремонт, оборудование, мебель', percent: 100 },
+              { category: 'Ежемесячные расходы', amount: 350000, description: 'Аренда, зарплаты, сырье', percent: 14 },
+              { category: 'Прогноз выручки', amount: 600000, description: 'При 200 клиентах в день', percent: 24 },
+              { category: 'Чистая прибыль', amount: 250000, description: 'После всех расходов', percent: 10 },
+              { category: 'Окупаемость', amount: 10, description: 'Срок возврата инвестиций (месяцы)', percent: null }
             ],
-            layout: 'grid'
+            sortable: true,
+            filterable: true,
+            pagination: false
           }
         },
-        // Карта с потенциальными локациями
+        // Шаг 10: Интерактивная карта с возможными местами
         {
-          trigger: /.*карт.*|.*карта.*|.*локации.*|.*места.*/i,
+          trigger: /.*карта.*|.*локации.*|.*места.*/i,
           response: "Отличная идея! Вот карта с потенциальными локациями для кофейни в выбранном районе: 🗺️",
           messageType: 'map',
           messageData: {
@@ -254,34 +259,51 @@ export class MockAgentService implements AgentService {
             interactive: true
           }
         },
-        // Прогресс анализа
+        // Шаг 11: Вопрос о расчетном счете
         {
-          trigger: /.*прогресс.*|.*статус.*|.*готовность.*/i,
-          response: "Отслеживаем прогресс анализа вашего проекта: 📈",
-          messageType: 'progress',
+          trigger: /.*счет.*|.*банк.*|.*расчетный.*/i,
+          response: "Нужен ли вам расчетный счет для бизнеса?",
+          messageType: 'button-group',
           messageData: {
-            title: 'Анализ проекта кофейни',
-            progress: 75,
-            max: 100,
-            progressStatus: 'running',
-            description: 'Завершены: концепция, финансы, локация. Осталось: маркетинг, найм',
-            showPercentage: true
+            buttons: [
+              {
+                id: 'account-yes',
+                label: 'Да, нужен расчетный счет',
+                action: { type: 'button', label: 'Да', payload: 'account-yes' },
+                variant: 'primary'
+              },
+              {
+                id: 'account-no',
+                label: 'Нет, не нужен',
+                action: { type: 'button', label: 'Нет', payload: 'account-no' },
+                variant: 'secondary'
+              }
+            ],
+            layout: 'horizontal'
           }
         },
-        // Быстрые ответы для продолжения
+        // Шаг 12: Помощь с открытием счета (форма для ИНН)
         {
-          trigger: /.*дальше.*|.*продолжить.*|.*следующий.*/i,
-          response: "Продолжаем анализ! Что вас интересует?",
-          messageType: 'quick-replies',
+          trigger: /.*нет.*|.*не нужен.*/i,
+          response: "Понял! Но если решите открыть счет позже, мы поможем. А пока давайте продолжим анализ вашего проекта.",
+          messageType: 'form',
           messageData: {
-            suggestions: [
-              'Маркетинговая стратегия',
-              'Подбор персонала',
-              'Юридические вопросы',
-              'Техническое оснащение',
-              'Финансовые расчеты'
+            title: 'Помощь с открытием расчетного счета',
+            fields: [
+              {
+                id: 'inn',
+                type: 'text',
+                label: 'ИНН',
+                placeholder: 'Введите ваш ИНН',
+                required: true,
+                validation: {
+                  pattern: /^\d{10,12}$/,
+                  min: 10,
+                  max: 12
+                }
+              }
             ],
-            maxVisible: 5
+            submitLabel: 'Отправить заявку'
           }
         }
       ]
@@ -289,7 +311,8 @@ export class MockAgentService implements AgentService {
   }
 
   private findMatchingStep(message: string): BusinessScenarioStep | null {
-    for (let i = this.step; i < this.currentScenario.steps.length; i++) {
+    // Поиск по всему массиву шагов, а не только с текущей позиции
+    for (let i = 0; i < this.currentScenario.steps.length; i++) {
       if (this.currentScenario.steps[i].trigger.test(message)) {
         return this.currentScenario.steps[i]
       }
@@ -344,14 +367,35 @@ export class MockAgentService implements AgentService {
     const step = this.findMatchingStep(message)
 
     if (step) {
-      this.step++
-      
       // Обновляем данные сценария кофейни и переключаем тему при выборе бизнес-режима
       if (message.toLowerCase().includes('ммб') || message.toLowerCase().includes('кб')) {
         this.coffeeShopScenario.theme = 'green'
         // Вызываем callback для смены темы в UI
         if (this.config.onThemeChange) {
           this.config.onThemeChange('green')
+        }
+
+        // Автоматически предлагаем следующий этап - форму сбора данных о локации
+        const locationFormStep = this.currentScenario.steps.find(s =>
+          s.trigger.toString().includes('локация') || s.trigger.toString().includes('город')
+        )
+
+        if (locationFormStep) {
+          // Сохраняем reasoning-сообщение из текущего шага
+          const reasoningMessage = this.createAgentMessage(step)
+
+          // Создаем текстовое сообщение о переходе к форме локации как дополнительную информацию
+          const locationFormTextMessage = `\n\n${locationFormStep.response}`
+
+          return {
+            message: step.response + locationFormTextMessage,
+            type: 'text', // Оставляем тип 'text' для совместимости с AgentResponse
+            actions: locationFormStep.actions,
+            metadata: {
+              messageType: reasoningMessage.type, // Сохраняем тип reasoning в metadata
+              messageData: reasoningMessage // Сохраняем reasoning-сообщение в metadata
+            }
+          }
         }
       }
 
@@ -381,7 +425,6 @@ export class MockAgentService implements AgentService {
 
   async startSession(theme: ThemeType): Promise<void> {
     console.log(`Starting session with theme: ${theme}`)
-    this.step = 0
     this.coffeeShopScenario = {
       currentStep: 0,
       userData: {},
@@ -391,7 +434,6 @@ export class MockAgentService implements AgentService {
 
   async endSession(): Promise<void> {
     console.log('Ending session')
-    this.step = 0
     this.coffeeShopScenario = {
       currentStep: 0,
       userData: {},

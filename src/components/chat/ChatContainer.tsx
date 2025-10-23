@@ -6,7 +6,7 @@ import MessageInput from './MessageInput'
 import AgentStatus from './AgentStatus'
 
 const ChatContainer: React.FC = memo(() => {
-  const { theme, currentTheme, isBusinessMode } = useTheme()
+  const { theme } = useTheme()
   const { isLoading } = useChat()
 
   return (
@@ -18,44 +18,6 @@ const ChatContainer: React.FC = memo(() => {
         transition: 'background-color var(--theme-transition), color var(--theme-transition)'
       }}
     >
-      {/* Header Area */}
-      <div
-        className="sdds-chat-header px-6 py-4 border-b theme-transition"
-        style={{
-          backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.border,
-          transition: 'background-color var(--theme-transition), border-color var(--theme-transition)'
-        }}
-      >
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="sdds-heading-1 text-xl font-semibold theme-transition" style={{
-              color: theme.colors.text.primary,
-              transition: 'color var(--theme-transition)'
-            }}>
-              BCP AI Консультант
-            </h1>
-            <p className="sdds-paragraph text-sm mt-1 theme-transition" style={{
-              color: theme.colors.text.secondary,
-              transition: 'color var(--theme-transition)'
-            }}>
-              {isBusinessMode ? 'Бизнес-режим' : 'Стандартный режим'} • {currentTheme === 'purple' ? 'Фиолетовая тема' : 'Зеленая тема'}
-            </p>
-          </div>
-          {isBusinessMode && (
-            <div
-              className="sdds-badge sdds-badge--success px-3 py-1 rounded-full text-xs font-medium theme-transition"
-              style={{
-                backgroundColor: theme.colors.primary,
-                color: theme.colors.text.inverse,
-                transition: 'background-color var(--theme-transition), color var(--theme-transition)'
-              }}
-            >
-              Бизнес-режим
-            </div>
-          )}
-        </div>
-      </div>
 
       {/* Main Chat Area */}
       <div className="sdds-chat-main flex-1 flex flex-col">
