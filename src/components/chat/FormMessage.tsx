@@ -1,7 +1,7 @@
 import React, { memo, useState, useCallback, useMemo } from 'react';
 import { FormMessage as FormMessageType, FormField } from '@/types/chat';
 import { Theme } from '@/types/theme';
-import { Button, TextArea } from '@/components/sdds-imports';
+import { Button, TextArea, Checkbox } from '@/components/sdds-imports';
 
 interface FormMessageProps {
   message: FormMessageType;
@@ -122,22 +122,14 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
     const isTouched = touchedFields.has(field.id);
     const showError = isTouched && error;
 
-    const commonProps = {
+    const commonInputProps = {
       id: field.id,
       value: value,
-      onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         handleFieldChange(field.id, e.target.value),
       placeholder: field.placeholder,
       required: field.required,
-      className: `w-full px-3 py-2 rounded-lg border text-sm form-transition ${
-        showError
-          ? 'border-red-500 focus:border-red-500 focus:ring-red-500 shake-animation'
-          : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
-      } hover-lift`,
       style: {
-        backgroundColor: theme.colors.background,
-        color: theme.colors.text.primary,
-        borderColor: showError ? '#EF4444' : theme.colors.border,
         animationDelay: `${index * 50}ms`
       }
     };
@@ -148,24 +140,51 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
       case 'number':
         return (
           <input
-            {...commonProps}
+            {...commonInputProps}
             type={field.type}
+            className="form-transition"
           />
         );
 
       case 'textarea':
         return (
           <TextArea
-            {...commonProps}
-            size="l"
+            id={field.id}
+            value={value}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              handleFieldChange(field.id, e.target.value)
+            }
+            placeholder={field.placeholder}
+            required={field.required}
             resize="vertical"
+            size="l"
+            status={showError ? 'error' as const : undefined}
+            helperText={showError ? error : undefined}
+            className="form-transition"
+            style={{ animationDelay: `${index * 50}ms` }}
           />
         );
 
       case 'select':
         return (
           <select
-            {...commonProps}
+            id={field.id}
+            value={value}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              handleFieldChange(field.id, e.target.value)
+            }
+            required={field.required}
+            className={`w-full px-3 py-2 rounded-lg border text-sm form-transition ${
+              showError
+                ? 'border-red-500 focus:border-red-500 focus:ring-red-500 shake-animation'
+                : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+            } hover-lift`}
+            style={{
+              backgroundColor: theme.colors.background,
+              color: theme.colors.text.primary,
+              borderColor: showError ? '#EF4444' : theme.colors.border,
+              animationDelay: `${index * 50}ms`
+            }}
           >
             <option value="">Выберите вариант</option>
             {field.options?.map(option => (
@@ -178,23 +197,20 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
 
       case 'checkbox':
         return (
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id={field.id}
-              checked={!!value}
-              onChange={(e) => handleFieldChange(field.id, e.target.checked)}
-              className="w-4 h-4"
-            />
-            <label htmlFor={field.id} className="text-sm">
-              {field.label}
-            </label>
-          </div>
+          <Checkbox
+            id={field.id}
+            checked={!!value}
+            onChange={(e) => handleFieldChange(field.id, e.target.checked)}
+            label={field.label}
+            size="l"
+            className="form-transition"
+            style={{ animationDelay: `${index * 50}ms` }}
+          />
         );
 
       case 'radio':
         return (
-          <div className="space-y-2">
+          <div className="space-y-2 form-transition" style={{ animationDelay: `${index * 50}ms` }}>
             {field.options?.map((option) => (
               <div key={option.value} className="flex items-center gap-2">
                 <input
@@ -216,13 +232,21 @@ const FormMessage: React.FC<FormMessageProps> = memo(({
 
       case 'range':
         return (
-          <div className="space-y-2">
+          <div className="space-y-2 form-transition" style={{ animationDelay: `${index * 50}ms` }}>
             <input
-              {...commonProps}
               type="range"
+              id={field.id}
+              value={Number(value) || 0}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleFieldChange(field.id, e.target.value)
+              }
               min={field.validation?.min || 0}
               max={field.validation?.max || 100}
-              step={field.validation?.step || 1}
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-thumb"
+              style={{
+                backgroundColor: theme.colors.border,
+                animationDelay: `${index * 50}ms`
+              }}
             />
             <div className="flex justify-between text-xs" style={{ color: theme.colors.text.secondary }}>
               <span>{field.validation?.min || 0}</span>
