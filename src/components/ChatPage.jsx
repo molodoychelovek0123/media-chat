@@ -120,13 +120,20 @@ const ChatPage = () => {
     addMessage("ИНН подтвержден", 'user')
     setTimeout(() => {
       addMessage("Спасибо! Все данные получены. Наш специалист свяжется с вами в ближайшее время.", 'ai')
+      // Показываем слайдер и подборку публикаций после завершения процесса
+      setTimeout(() => {
+        setCurrentStep('show-content')
+      }, 1500)
     }, 1000)
   }
 
   const renderCurrentStep = () => {
     switch (currentStep) {
       case 'rko':
-        return <RKOSection onComplete={() => changeStepWithAnimation('main')} />
+        return <RKOSection
+          onComplete={() => changeStepWithAnimation('main')}
+          onOpenAccount={() => handleQuickAction('lead')}
+        />
       case 'publication':
         return <PublicationPreview onComplete={() => changeStepWithAnimation('main')} />
       case 'lead':
@@ -139,6 +146,16 @@ const ChatPage = () => {
         return <InteractiveMap onLocationSelect={handleMapSelect} />
       case 'inn':
         return <INNVerification onComplete={handleINNComplete} />
+      case 'show-content':
+        return (
+          <div className="content-showcase">
+            <h3>Пока вы ждете звонок, ознакомьтесь с нашими материалами:</h3>
+            {/* Слайдер */}
+            <TopSlider />
+            {/* Подборка публикаций */}
+            <ArticleCards />
+          </div>
+        )
       default:
         return (
           <div className="quick-actions">

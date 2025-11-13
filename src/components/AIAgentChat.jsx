@@ -43,20 +43,23 @@ const AIAgentChat = ({ onMapSelect }) => {
       // Имитация ответа AI
       setTimeout(() => {
         const aiResponses = [
-          "Интересно! Продолжайте, я анализирую информацию...",
-          "Отличные данные! На основе этой информации я могу предложить...",
-          "Понимаю вашу ситуацию. Давайте рассмотрим оптимальные решения...",
-          "Спасибо за подробности! Теперь я могу дать более точные рекомендации..."
+          // "Интересно! А на какой уровень прибыли расчитываете?",
+          // "Отличные данные! На основе этой информации я могу предложить...",
+          // "Понимаю вашу ситуацию. Давайте рассмотрим оптимальные решения...",
+          "Спасибо за подробности! Вы хотите закупать уже обжаренные кофейные зерна?"
         ]
         
         const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)]
-        addMessage(randomResponse, 'ai')
-        setIsTyping(false)
+         if (messages.length < 3) {
+          addMessage(randomResponse, 'ai')
+          setIsTyping(false)
+        }
         
         // После нескольких сообщений предлагаем карту
-        if (messages.length >= 4) {
+        if (messages.length >= 2) {
           setTimeout(() => {
             addMessage("Для более точного анализа давайте выберем локацию вашего бизнеса на карте.", 'ai')
+        setIsTyping(false)
           }, 1000)
         }
       }, 1500)
@@ -100,14 +103,14 @@ const AIAgentChat = ({ onMapSelect }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="ai-chat-actions">
+      {messages.length > 4 && <div className="ai-chat-actions">
         <button 
           className="btn btn-primary"
           onClick={handleMapButton}
         >
           Выбрать локацию на карте
         </button>
-      </div>
+      </div>}
 
       <form onSubmit={handleSendMessage} className="ai-message-input-form">
         <input

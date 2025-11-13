@@ -136,6 +136,18 @@
   padding-top: 30px;
 }
 
+.content-showcase {
+  padding: 20px 0;
+}
+
+.content-showcase h3 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--text-dark);
+  font-size: 18px;
+  font-weight: 500;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
   .chat-page {
@@ -156,5 +168,14 @@
 
   .message-input-form {
     padding: 16px;
+  }
+
+  .content-showcase {
+    padding: 16px 0;
+  }
+
+  .content-showcase h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
   }
 }

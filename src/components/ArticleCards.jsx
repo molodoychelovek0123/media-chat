@@ -10,7 +10,7 @@ const ArticleCards = () => {
       category: "Финансы",
       readTime: "5 мин",
       date: "15 ноября 2024",
-      image: "/img/original(4).jpg",
+      image: "/img/original8.jpg",
       url: "#"
     },
     {
@@ -20,7 +20,7 @@ const ArticleCards = () => {
       category: "Налоги",
       readTime: "7 мин",
       date: "12 ноября 2024",
-      image: "/img/original(5).jpg",
+      image: "/img/original5.jpg",
       url: "#"
     },
     {
@@ -30,7 +30,7 @@ const ArticleCards = () => {
       category: "Управление",
       readTime: "6 мин",
       date: "10 ноября 2024",
-      image: "/img/original(6).jpg",
+      image: "/img/original6.jpg",
       url: "#"
     },
     {
@@ -40,7 +40,7 @@ const ArticleCards = () => {
       category: "Налоги",
       readTime: "8 мин",
       date: "8 ноября 2024",
-      image: "/img/original(7).jpg",
+      image: "/img/original7.jpg",
       url: "#"
     }
   ];

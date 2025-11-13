@@ -17,7 +17,7 @@ const TopSlider = () => {
       subtitle: "Инсайты и тренды",
       description: "Актуальные данные и аналитика для принятия решений",
       buttonText: "Узнать больше",
-      image: "/img/original(1).jpg",
+      image: "/img/original1.jpg",
       bgColor: "linear-gradient(90deg, #1E8C32 0%, #1A7A2B 100%)"
     },
     {
@@ -25,7 +25,7 @@ const TopSlider = () => {
       subtitle: "Для вашего бизнеса",
       description: "Кредиты, РКО и другие финансовые продукты",
       buttonText: "Подробнее",
-      image: "/img/original(2).jpg",
+      image: "/img/original2.jpg",
       bgColor: "linear-gradient(90deg, #1A7A2B 0%, #166824 100%)"
     },
     {
@@ -33,7 +33,7 @@ const TopSlider = () => {
       subtitle: "От профессионалов",
       description: "Советы от ведущих бизнес-экспертов",
       buttonText: "Изучить",
-      image: "/img/original(3).jpg",
+      image: "/img/original3.jpg",
       bgColor: "linear-gradient(90deg, #166824 0%, #13571F 100%)"
     }
   ];
@@ -64,7 +64,7 @@ const TopSlider = () => {
           <div
             key={index}
             className={`slider-slide ${index === currentSlide ? 'active' : ''}`}
-            style={{ background: slide.bgColor }}
+            style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="slide-content">
               <div className="slide-text">
@@ -74,9 +74,6 @@ const TopSlider = () => {
                 <button className="slide-button">
                   {slide.buttonText}
                 </button>
-              </div>
-              <div className="slide-image">
-                <img src={slide.image} alt={slide.title} />
               </div>
             </div>
           </div>

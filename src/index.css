@@ -1,6 +1,7 @@
 @import './fonts.scss';
 
 :root {
+  background-color: #191d31;
   --primary-color: #107f8c;
   --primary-dark: #107f8c;
   --secondary-color: #21a19a;

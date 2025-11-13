@@ -1,7 +1,7 @@
 import React from 'react'
 import './RKOSection.css'
 
-const RKOSection = ({ onComplete }) => {
+const RKOSection = ({ onComplete, onOpenAccount }) => {
   const benefits = [
     {
       title: "Бесплатное открытие",
@@ -43,7 +43,7 @@ const RKOSection = ({ onComplete }) => {
       </div>
       
       <div className="rko-actions">
-        <button className="btn btn-primary" onClick={onComplete}>
+        <button className="btn btn-primary" onClick={onOpenAccount}>
           Открыть счет онлайн
         </button>
         <button className="btn btn-secondary" onClick={onComplete}>
