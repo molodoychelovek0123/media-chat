@@ -7,6 +7,8 @@ import ServiceSelection from './ServiceSelection'
 import AIAgentChat from './AIAgentChat'
 import InteractiveMap from './InteractiveMap'
 import INNVerification from './INNVerification'
+import TopSlider from './TopSlider'
+import ArticleCards from './ArticleCards'
 import './ChatPage.css'
 
 const ChatPage = () => {
@@ -171,6 +173,12 @@ const ChatPage = () => {
       <div className="chat-container">
         <div className='chat-scroll'>
           <div className="messages-container">
+            {/* Верхний слайдер */}
+            <TopSlider />
+            
+            {/* Подборка карточек статей */}
+            <ArticleCards />
+            
             {messages.map(message => (
               <MessageBubble
                 key={message.id}
