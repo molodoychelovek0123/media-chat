@@ -84,7 +84,7 @@
   transition: border-color 0.3s ease;
   background: #24242580;
   border: 0;
-  color: var(--bg-light)
+  color: var(--text-light)
 }
 
 .message-input:focus {

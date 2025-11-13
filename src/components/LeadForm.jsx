@@ -23,7 +23,7 @@ const LeadForm = ({ onComplete }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     // Имитация отправки формы
     setTimeout(() => {
       setIsSubmitting(false)
@@ -127,15 +127,15 @@ const LeadForm = ({ onComplete }) => {
         </div>
 
         <div className="form-actions">
-          <button 
-            type="button" 
-            className="btn btn-secondary"
+          <button
+            type="button"
+            className="btn btn-primary"
             onClick={handleSberIDAuth}
           >
             Заполнить через СберID
           </button>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="btn btn-primary"
             disabled={isSubmitting}
           >

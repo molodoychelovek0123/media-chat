@@ -41,6 +41,7 @@
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.3s ease;
+  background: var(--bg-dark);
 }
 
 .form-group .input:focus {
@@ -49,7 +50,7 @@
 }
 
 .form-group select.input {
-  background: white;
+  background: var(--bg-dark);
   cursor: pointer;
 }
 
@@ -76,11 +77,11 @@
   .form-actions {
     flex-direction: column;
   }
-  
+
   .form-actions .btn {
     width: 100%;
   }
-  
+
   .form-group .input {
     font-size: 14px;
   }
