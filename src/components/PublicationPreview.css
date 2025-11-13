@@ -1,0 +1,80 @@
+.publication-preview {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.publication-preview h3 {
+  text-align: center;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.publication-card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.publication-image {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+.publication-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.publication-content {
+  padding: 20px;
+}
+
+.publication-content h4 {
+  margin: 0 0 12px 0;
+  color: var(--text-dark);
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.publication-summary {
+  color: var(--text-light);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.publication-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.publication-actions .btn {
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .publication-content {
+    padding: 16px;
+  }
+  
+  .publication-content h4 {
+    font-size: 16px;
+  }
+  
+  .publication-actions {
+    flex-direction: column;
+  }
+  
+  .publication-actions .btn {
+    width: 100%;
+  }
+}

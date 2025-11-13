@@ -1,0 +1,83 @@
+.rko-section {
+  text-align: center;
+}
+
+.rko-section h3 {
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.rko-description {
+  color: var(--text-light);
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.benefit-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.benefit-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.benefit-content h4 {
+  margin: 0 0 4px 0;
+  color: var(--text-dark);
+  font-size: 16px;
+}
+
+.benefit-content p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.rko-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .rko-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .rko-actions .btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}

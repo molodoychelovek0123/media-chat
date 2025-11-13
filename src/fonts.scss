@@ -1,0 +1,406 @@
+// SBSansInterface
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Interface';
+  font-style: normal;
+  font-weight: 200;
+  src: url('/fonts/SBSansUI-Light.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Interface';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansUI-Regular.woff2') format('woff2'),
+  url('/fonts/SBSansUI-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Interface';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/fonts/SBSansUI-Semibold.woff2') format('woff2'),
+  url('/fonts/SBSansUI-Semibold.woff') format('woff');
+}
+
+// SBSansText
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: normal;
+  font-weight: 100;
+  src: url('/fonts/SBSansText-Thin.woff2') format('woff2'),
+  url('/fonts/SBSansText-Thin.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/SBSansText-Light.woff2') format('woff2'),
+  url('/fonts/SBSansText-Light.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: italic;
+  font-weight: 300;
+  src: url('/fonts/SBSansText-LightItalic.woff2') format('woff2'),
+  url('/fonts/SBSansText-LightItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansText-Regular.woff2') format('woff2'),
+  url('/fonts/SBSansText-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/fonts/SBSansText-Italic.woff2') format('woff2'),
+  url('/fonts/SBSansText-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/SBSansText-Medium.woff2') format('woff2'),
+  url('/fonts/SBSansText-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/fonts/SBSansText-Semibold.woff2') format('woff2'),
+  url('/fonts/SBSansText-Semibold.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: italic;
+  font-weight: 600;
+  src: url('/fonts/SBSansText-SemiBoldItalic.woff2') format('woff2'),
+  url('/fonts/SBSansText-SemiBoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/SBSansText-Bold.woff2') format('woff2'),
+  url('/fonts/SBSansText-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: italic;
+  font-weight: bold;
+  src: url('/fonts/SBSansText-BoldItalic.woff2') format('woff2'),
+  url('/fonts/SBSansText-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text';
+  font-style: normal;
+  font-weight: 900;
+  src: url('/fonts/SBSansText-Heavy.woff2') format('woff2'),
+  url('/fonts/SBSansText-Heavy.woff') format('woff');
+}
+
+// SBSansTextCaps
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text Caps';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansTextCaps-Regular.woff2') format('woff2'),
+  url('/fonts/SBSansTextCaps-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text Caps';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/SBSansTextCaps-Bold.woff2') format('woff2'),
+  url('/fonts/SBSansTextCaps-Bold.woff') format('woff');
+}
+
+// SBSansTextCond
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text Cond';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansTextCond-Regular.woff2') format('woff2'),
+  url('/fonts/SBSansTextCond-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text Cond';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/SBSansTextCond-Bold.woff2') format('woff2'),
+  url('/fonts/SBSansTextCond-Bold.woff') format('woff');
+}
+
+// SBSansTextMono
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansTextMono-Regular.woff2') format('woff2'),
+  url('/fonts/SBSansTextMono-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Text Mono';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/SBSansTextMono-Bold.woff2') format('woff2'),
+  url('/fonts/SBSansTextMono-Bold.woff') format('woff');
+}
+
+// SBSansDisplay
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Display';
+  font-style: normal;
+  font-weight: 100;
+  src: url('/fonts/SBSansDisplay-Thin.woff2') format('woff2'),
+  url('/fonts/SBSansDisplay-Thin.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Display';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/SBSansDisplay-Light.woff2') format('woff2'),
+  url('/fonts/SBSansDisplay-Light.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Display';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansDisplay-Regular.woff2') format('woff2'),
+  url('/fonts/SBSansDisplay-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Display';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/fonts/SBSansDisplay-Semibold.woff2') format('woff2'),
+  url('/fonts/SBSansDisplay-Semibold.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Display';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/SBSansDisplay-Bold.woff2') format('woff2'),
+  url('/fonts/SBSansDisplay-Bold.woff') format('woff');
+}
+
+// SBSansCondMono
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Cond Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansCondMono-Regular.woff2') format('woff2'),
+  url('/fonts/SBSansCondMono-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Cond Mono';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/SBSansCondMono-Bold.woff2') format('woff2'),
+  url('/fonts/SBSansCondMono-Bold.woff') format('woff');
+}
+
+// SBSansScreen
+@font-face {
+  font-display: swap;
+  font-family: 'SB Sans Screen';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSansScreen.woff2') format('woff2'),
+  url('/fonts/SBSansScreen.woff') format('woff');
+}
+
+// SBSerifDisplay
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Display';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/SBSerifDisplay-Light.woff2') format('woff2'),
+  url('/fonts/SBSerifDisplay-Light.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Display';
+  font-style: italic;
+  font-weight: 300;
+  src: url('/fonts/SBSerifDisplay-LightItalic.woff2') format('woff2'),
+  url('/fonts/SBSerifDisplay-LightItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSerifDisplay-Regular.woff2') format('woff2'),
+  url('/fonts/SBSerifDisplay-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Display';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/fonts/SBSerifDisplay-Italic.woff2') format('woff2'),
+  url('/fonts/SBSerifDisplay-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Display';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/fonts/SBSerifDisplay-Semibold.woff2') format('woff2'),
+  url('/fonts/SBSerifDisplay-Semibold.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Display';
+  font-style: italic;
+  font-weight: 600;
+  src: url('/fonts/SBSerifDisplay-SemiboldItalic.woff2') format('woff2'),
+  url('/fonts/SBSerifDisplay-SemiboldItalic.woff') format('woff');
+}
+
+// SBSerifCondensed
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSerifCondensed.woff2') format('woff2'),
+  url('/fonts/SBSerifCondensed.woff') format('woff');
+}
+
+// SBSerifText
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/SBSerifText-Light.woff2') format('woff2'),
+  url('/fonts/SBSerifText-Light.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: italic;
+  font-weight: 300;
+  src: url('/fonts/SBSerifText-LightItalic.woff2') format('woff2'),
+  url('/fonts/SBSerifText-LightItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/SBSerifText-Regular.woff2') format('woff2'),
+  url('/fonts/SBSerifText-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/fonts/SBSerifText-Italic.woff2') format('woff2'),
+  url('/fonts/SBSerifText-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/fonts/SBSerifText-SemiBold.woff2') format('woff2'),
+  url('/fonts/SBSerifText-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: italic;
+  font-weight: 600;
+  src: url('/fonts/SBSerifText-SemiboldItalic.woff2') format('woff2'),
+  url('/fonts/SBSerifText-SemiboldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: italic;
+  font-weight: bold;
+  src: url('/fonts/SBSerifText-Bold.woff2') format('woff2'),
+  url('/fonts/SBSerifText-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: italic;
+  font-weight: bold;
+  src: url('/fonts/SBSerifText-BoldItalic.woff2') format('woff2'),
+  url('/fonts/SBSerifText-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SB Serif Text';
+  font-style: normal;
+  font-weight: 900;
+  src: url('/fonts/SBSerifText-Heavy.woff2') format('woff2'),
+  url('/fonts/SBSerifText-Heavy.woff') format('woff');
+}
