@@ -1,6 +1,13 @@
 .service-selection {
   max-width: 600px;
   margin: 0 auto;
+    opacity: 0;
+    transition-delay: 2s;
+    transition: opacity 0.5s ease;
+}
+.service-selection.active {
+    opacity: 1;
+
 }
 
 .service-selection h3 {

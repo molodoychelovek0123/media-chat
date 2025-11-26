@@ -130,8 +130,9 @@
 }
 
 .logo {
-  height: 32px;
-  width: auto;
+    height: 32px;
+    width: 192px !important;
+    object-fit: contain;
   display: block;
 }
 
@@ -148,6 +149,89 @@
   display: flex;
   align-items: flex-end;
 }
+.Header_detailMobButton__nHEDv{
+    opacity: 0;
+    pointer-events: none;
+}
+.Header_header__gJ4E7.Header_white__uG9bn {
+    background-color: #fff;
+}
+
+.Header_header__gJ4E7 {
+    transition: background-color .6s
+    ease-in-out, transform .6s
+    ease-in-out;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, .078);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.Header_row__kGP0D {
+    align-items: center;
+    display: flex
+;
+    height: 62px;
+    justify-content: space-between;max-width: 1068px;
+    margin: 0 auto;
+}
+.Header_functionality__OkA4v {
+    align-items: center;
+    display: flex
+;
+    gap: 32px;
+}
+.Header_navbar__4DfEY {
+    display: flex
+;
+    font-size: 16px;
+    font-weight: 400;
+    gap: 32px;
+    line-height: 24px;
+    color: #fff;
+}
+.Header_navbar__4DfEY span {
+    cursor: pointer;
+    color: #fff;
+}
+.Header_btnMenuChevron__OXR2_ {
+    margin-left: 8px;
+    padding-top: 2px;
+}
+.Header_navItem__OxyFO {
+    transition: color .25s
+    ease-in-out;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+}
+
+.Header_navItem__OxyFO:hover {
+    color: #fff;
+}
+.Header_buttons__bZZTa {
+    display: flex
+;
+    gap: 12px;
+}
+
+
+.sbl-image-fake{
+    position: fixed;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s
+    ease-in-out;
+    width: 2290px;
+}
+
+
 
 /* Адаптивность */
 @media (max-width: 768px) {

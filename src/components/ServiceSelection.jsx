@@ -1,30 +1,37 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './ServiceSelection.css'
 
 const ServiceSelection = ({ onServiceSelect }) => {
+  const [active, setActive] = useState(false);
   const services = [
     {
       id: 'competitor-analysis',
       title: 'Анализ конкурентов',
       description: 'Полный анализ конкурентной среды вашего бизнеса',
-      icon: '📊'
+      icon: ''
     },
     {
       id: 'business-plan',
       title: 'Разработать БП',
       description: 'Создание детального бизнес-плана для вашего проекта',
-      icon: '📈'
+      icon: ''
     },
     {
       id: 'marketing-strategy',
       title: 'Маркетинговая стратегия',
       description: 'Разработка эффективной маркетинговой стратегии',
-      icon: '🎯'
+      icon: ''
     }
   ]
 
+  useEffect(() => {
+    setTimeout(() => {
+      setActive(true);
+    }, 1800);
+  }, []);
+
   return (
-    <div className="service-selection fade-in">
+    <div className={`service-selection  ${active ? 'fade-in active' : ''}`}>
       <h3>Пока ждете звонка от консультанта</h3>
       <p className="selection-description">
         Выберите дополнительную услугу для вашего бизнеса:

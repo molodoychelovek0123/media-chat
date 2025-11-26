@@ -1,0 +1,1087 @@
+<!DOCTYPE html><html lang="ru"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Маркетинговая Стратегия: От &#34;Невидимой&#34; к &#34;Излюбленной&#34;</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'serif': ['Playfair Display', 'serif'],
+              'sans': ['Inter', 'sans-serif']
+            },
+            colors: {
+              'coffee': {
+                50: '#faf7f2',
+                100: '#f4ede1',
+                200: '#e8d9c5',
+                300: '#dbbf9f',
+                400: '#c9a277',
+                500: '#b8865a',
+                600: '#a5754f',
+                700: '#8a5f43',
+                800: '#714f3a',
+                900: '#5c4433'
+              },
+              'terracotta': {
+                50: '#fdf7f4',
+                100: '#fbeae4',
+                200: '#f6d5c8',
+                300: '#f0b8a0',
+                400: '#e89270',
+                500: '#de7450',
+                600: '#cd5c3a',
+                700: '#ab4932',
+                800: '#8a3e2f',
+                900: '#70352a'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #faf7f2 0%, #e8d9c5 50%, #f0b8a0 100%);
+        }
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none; /* Предотвращает стандартное поведение касания */
+            -webkit-user-select: none; /* Предотвращает выделение текста */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 1024px) {
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+    <base target="_blank">
+</head>
+
+<body class="bg-stone-50 text-stone-900 font-sans overflow-x-hidden">
+
+<!-- Fixed Table of Contents -->
+<div id="toc" class="fixed left-0 top-0 h-full w-80 bg-white/95 backdrop-blur-sm border-r border-stone-200 z-50 overflow-y-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <div class="p-6">
+        <h3 class="font-serif font-semibold text-lg mb-4 text-coffee-700">Содержание</h3>
+        <nav class="space-y-2">
+            <a href="#hero" class="block px-3 py-2 text-sm hover:bg-coffee-50 rounded-md transition-colors">Введение</a>
+            <a href="#current-state" class="block px-3 py-2 text-sm hover:bg-coffee-50 rounded-md transition-colors">Анализ Текущей Ситуации</a>
+            <a href="#target-audience" class="block px-3 py-2 text-sm hover:bg-coffee-50 rounded-md transition-colors">Анализ Целевой Аудитории</a>
+            <a href="#strategy" class="block px-3 py-2 text-sm hover:bg-coffee-50 rounded-md transition-colors">Маркетинговая Стратегия</a>
+            <a href="#marketing-channels" class="block px-3 py-2 text-sm hover:bg-coffee-50 rounded-md transition-colors">Маркетинговые Каналы</a>
+            <a href="#budget" class="block px-3 py-2 text-sm hover:bg-coffee-50 rounded-md transition-colors">Бюджет и KPI</a>
+        </nav>
+    </div>
+</div>
+
+<!-- Toggle Button for Mobile -->
+<button id="toc-toggle" class="fixed top-4 left-4 z-50 lg:hidden bg-white/90 backdrop-blur-sm border border-stone-200 rounded-full p-3 shadow-lg">
+    <i class="fas fa-bars text-coffee-600"></i>
+</button>
+
+<!-- Main Content -->
+<div class="lg:ml-80">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-gradient min-h-screen flex items-center">
+        <div class="container mx-auto px-4 sm:px-8 py-8 md:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+                <!-- Text Content -->
+                <div class="lg:col-span-7">
+                    <div class="mb-8">
+                <span class="inline-block px-4 py-2 bg-coffee-100 text-coffee-700 text-sm font-medium rounded-full mb-4">
+                  Маркетинговая Стратегия
+                </span>
+                        <h1 class="font-serif text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight mb-6">
+                            От <span class="italic text-coffee-600">&#34;Невидимой&#34;</span> к
+                            <br/>
+                            <span class="text-terracotta-600">&#34;Излюбленной&#34;</span>
+                        </h1>
+                        <p class="text-base sm:text-lg lg:text-xl text-stone-600 leading-relaxed mb-8">
+                            Комплексная стратегия превращения кофейни в скрытый алмаз Савеловской:
+                            от анализа проблем к устойчивому росту и узнаваемости
+                        </p>
+                    </div>
+
+                    <!-- Key Highlights Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-stone-200">
+                            <div class="text-2xl font-bold text-terracotta-600 mb-2">30% → 80%</div>
+                            <div class="text-sm text-stone-600">Целевая заполняемость в пиковые часы</div>
+                        </div>
+                        <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-stone-200">
+                            <div class="text-2xl font-bold text-coffee-600 mb-2">200+</div>
+                            <div class="text-sm text-stone-600">Новых клиентов из жилых домов</div>
+                        </div>
+                        <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-stone-200">
+                            <div class="text-2xl font-bold text-terracotta-600 mb-2">+20%</div>
+                            <div class="text-sm text-stone-600">Рост среднего чека за 2 месяца</div>
+                        </div>
+                        <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-stone-200">
+                            <div class="text-2xl font-bold text-coffee-600 mb-2">3 мес</div>
+                            <div class="text-sm text-stone-600">Срок реализации стратегии</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Element -->
+                <div class="lg:col-span-5">
+                    <div class="relative">
+                        <img src="https://kimi-web-img.moonshot.cn/img/estima.ru/a2294d0a45e64fadb2ae56d378b88a7e6fc2066c.jpg" alt="Уютная кофейня с мягкими креслами и деревянными столиками" class="w-full h-96 object-cover rounded-2xl shadow-2xl" size="medium" aspect="wide" style="photo" query="уютная кофейня интерьер" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-coffee-900/30 to-transparent rounded-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current State Analysis -->
+    <section id="current-state" class="py-20 bg-white">
+        <div class="container mx-auto px-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold mb-12 text-center">Анализ Текущей Ситуации</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-red-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Низкая Заполняемость</h3>
+                        <p class="text-stone-600">30% в часы пик, пустота в остальное время</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-eye-slash text-orange-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Низкая Видимость</h3>
+                        <p class="text-stone-600">&#34;Невидимость&#34; для жителей близлежащих домов</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-credit-card text-yellow-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Ограничения</h3>
+                        <p class="text-stone-600">Отсутствие РКО, бюджетные ограничения</p>
+                    </div>
+                </div>
+
+                <div class="bg-coffee-50 rounded-2xl p-8 mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6">Диагностика Проблемы</h3>
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            Текущая модель функционирования кофейни характеризуется крайне неравномерным распределением клиентского потока.
+                            В часы пик (7:00-11:00, 12:00-14:00) заполняемость достигает лишь 30%, в то время как в остальное время
+                            заведение практически пустует. <a href="https://clevertap.com/blog/hyperlocal-marketing/" class="text-coffee-600 underline hover:text-coffee-700">Исследования показывают</a>,
+                            что успешные кейсы, такие как ресторан Juliet Italian Kitchen в Остине, демонстрируют эффективность внедрения &#34;счастливых часов&#34;
+                            для привлечения клиентов в обычно тихие периоды.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Competitive Analysis Diagram -->
+                <div class="bg-white rounded-2xl border border-stone-200 p-8 mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-8 text-center">Структура Конкурентной Среды</h3>
+                    <div class="mermaid-container">
+                        <div class="mermaid-controls">
+                            <button class="mermaid-control-btn zoom-in" title="Увеличить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mermaid-control-btn zoom-out" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mermaid-control-btn reset-zoom" title="Сбросить">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <button class="mermaid-control-btn fullscreen" title="Полный экран">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="mermaid" id="competitive-analysis">
+                            graph TD
+                            A[&#34;Кофейный рынок&#34;] --&gt; B[&#34;Крупные сети&#34;]
+                            A --&gt; C[&#34;Независимые кофейни&#34;]
+                            A --&gt; D[&#34;Наша кофейня&#34;]
+
+                            B --&gt; B1[&#34;Starbucks
+                            <br/>Бренд, масштаб&#34;]
+                            B --&gt; B2[&#34;Кофемания
+                            <br/>Качество, традиции&#34;]
+
+                            C --&gt; C1[&#34;Local Coffee 1
+                            <br/>Атмосфера&#34;]
+                            C --&gt; C2[&#34;Local Coffee 2
+                            <br/>Направление&#34;]
+
+                            D --&gt; D1[&#34;Собственная обжарка
+                            <br/>Уникальные смеси&#34;]
+                            D --&gt; D2[&#34;Комфортная атмосфера
+                            <br/>Третье место&#34;]
+
+                            style A fill:#faf7f2,stroke:#b8865a,stroke-width:3px,color:#5c4433
+                            style B fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#5c4433
+                            style C fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#5c4433
+                            style D fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#5c4433
+                            style B1 fill:#fecaca,stroke:#dc2626,stroke-width:2px,color:#5c4433
+                            style B2 fill:#fecaca,stroke:#dc2626,stroke-width:2px,color:#5c4433
+                            style C1 fill:#fde68a,stroke:#d97706,stroke-width:2px,color:#5c4433
+                            style C2 fill:#fde68a,stroke:#d97706,stroke-width:2px,color:#5c4433
+                            style D1 fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#5c4433
+                            style D2 fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#5c4433
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-red-50 p-3 rounded-lg">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <span class="font-medium">Крупные сети</span>
+                            </div>
+                            <p class="text-stone-600">Масштаб, узнаваемость, стандарты</p>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                <span class="font-medium">Независимые</span>
+                            </div>
+                            <p class="text-stone-600">Аутентичность, специализация</p>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="font-medium">Наше преимущество</span>
+                            </div>
+                            <p class="text-stone-600">Уникальные смеси + атмосфера</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-terracotta-50 rounded-2xl p-8">
+                    <h3 class="font-serif text-2xl font-semibold mb-6">Уникальное Преимущество (USP)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 flex items-center">
+                                <i class="fas fa-seedling text-terracotta-600 mr-2"></i>
+                                Собственная Обжарка
+                            </h4>
+                            <p class="text-stone-700">Вы сами обжариваете кофе и предлагаете уникальные смеси, которых нет у конкурентов. Это позиционирует заведение как настоящую кофейную мастерскую.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 flex items-center">
+                                <i class="fas fa-couch text-terracotta-600 mr-2"></i>
+                                Комфортная Атмосфера
+                            </h4>
+                            <p class="text-stone-700">Создана комфортная обстановка с мягкими креслами и маленькими столиками — идеальное &#34;третье место&#34; между домом и офисом.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section id="target-audience" class="py-20 bg-stone-50">
+        <div class="container mx-auto px-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold mb-12 text-center">Анализ Целевой Аудитории и Рынка</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <!-- Current Audience -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200">
+                        <h3 class="font-serif text-2xl font-semibold mb-6 text-coffee-700">Текущая Аудитория</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-lg mb-2 flex items-center">
+                                    <i class="fas fa-building text-coffee-500 mr-2"></i>
+                                    Сотрудники Бизнес-Центра
+                                </h4>
+                                <p class="text-stone-600 mb-3">Поведение: &#34;С собой&#34; утром, быстрый перекус в обед</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-coffee-100 text-coffee-700 text-sm rounded-full">Скорость</span>
+                                    <span class="px-3 py-1 bg-coffee-100 text-coffee-700 text-sm rounded-full">Качество</span>
+                                    <span class="px-3 py-1 bg-coffee-100 text-coffee-700 text-sm rounded-full">Удобство</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Target Audience -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200">
+                        <h3 class="font-serif text-2xl font-semibold mb-6 text-terracotta-700">Целевая Аудитория</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-lg mb-2 flex items-center">
+                                    <i class="fas fa-home text-terracotta-500 mr-2"></i>
+                                    Жители Близлежащих Домов
+                                </h4>
+                                <p class="text-stone-600 mb-3">Демография: ~60,000 человек, молодые профессионалы, семьи</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-terracotta-100 text-terracotta-700 text-sm rounded-full">Качество кофе</span>
+                                    <span class="px-3 py-1 bg-terracotta-100 text-terracotta-700 text-sm rounded-full">Уютная атмосфера</span>
+                                    <span class="px-3 py-1 bg-terracotta-100 text-terracotta-700 text-sm rounded-full">&#34;Скрытое место&#34;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMART Goals -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200">
+                    <h3 class="font-serif text-2xl font-semibold mb-8 text-center">SMART-Цели</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Посещаемость</h4>
+                            <p class="text-stone-600 text-sm">Увеличение на 50% в непиковые часы за 3 месяца</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-users text-blue-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Новые Клиенты</h4>
+                            <p class="text-stone-600 text-sm">Привлечение 200 жителей района за 3 месяца</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-dollar-sign text-purple-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Средний Чек</h4>
+                            <p class="text-stone-600 text-sm">Повышение на 20% за 2 месяца</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Strategy -->
+    <section id="strategy" class="py-20 bg-white">
+        <div class="container mx-auto px-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold mb-12 text-center">Маркетинговая Стратегия</h2>
+
+                <div class="bg-gradient-to-r from-coffee-50 to-terracotta-50 rounded-2xl p-8 mb-16">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-center">Стратегия: &#34;От Невидимой к Излюбленной&#34;</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <div class="w-16 h-16 bg-coffee-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-gem text-coffee-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Превратите &#34;невидимость&#34; в преимущество</h4>
+                            <p class="text-sm text-stone-600">&#34;Скрытый кофейный алмаз Савеловской&#34; с уникальными смесями</p>
+                        </div>
+                        <div>
+                            <div class="w-16 h-16 bg-terracotta-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-users text-terracotta-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Активно привлекайте жителей</h4>
+                            <p class="text-sm text-stone-600">Гиперлокальный маркетинг, партнерства, ивенты</p>
+                        </div>
+                        <div>
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-clock text-green-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Стимулируйте спрос в непиковые часы</h4>
+                            <p class="text-sm text-stone-600">&#34;Счастливые часы&#34;, комбо-предложения, лояльность</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Positioning -->
+                <div class="mb-16">
+                    <h3 class="font-serif text-2xl font-semibold mb-8">Позиционирование и Брендинг</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-coffee-50 rounded-xl p-6">
+                            <h4 class="font-semibold text-lg mb-3 flex items-center">
+                                <i class="fas fa-quote-left text-coffee-600 mr-2"></i>
+                                Основное Послание
+                            </h4>
+                            <p class="text-stone-700 italic">&#34;Скрытый кофейный алмаз Савеловской&#34;</p>
+                            <p class="text-sm text-stone-600 mt-2">Создает ощущение эксклюзивности и ценности</p>
+                        </div>
+                        <div class="bg-terracotta-50 rounded-xl p-6">
+                            <h4 class="font-semibold text-lg mb-3 flex items-center">
+                                <i class="fas fa-heart text-terracotta-600 mr-2"></i>
+                                История Бренда
+                            </h4>
+                            <p class="text-stone-700">Страсть к кофе и желание создать уникальное место для выхода из рутины</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Strategy -->
+                <div class="mb-16">
+                    <h3 class="font-serif text-2xl font-semibold mb-8">Продуктовая Стратегия</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white border border-stone-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                            <i class="fas fa-layer-group text-2xl text-coffee-600 mb-4"></i>
+                            <h4 class="font-semibold mb-2">Комбо-Предложения</h4>
+                            <p class="text-sm text-stone-600">Кофе + выпечка, ланч-сеты для повышения среднего чека</p>
+                        </div>
+                        <div class="bg-white border border-stone-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                            <i class="fas fa-star text-2xl text-terracotta-600 mb-4"></i>
+                            <h4 class="font-semibold mb-2">Премиум-Позиции</h4>
+                            <p class="text-sm text-stone-600">Спешиалти-напитки, ограниченные смеси</p>
+                        </div>
+                        <div class="bg-white border border-stone-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                            <i class="fas fa-shopping-bag text-2xl text-green-600 mb-4"></i>
+                            <h4 class="font-semibold mb-2">Бобы и Мерч</h4>
+                            <p class="text-sm text-stone-600">&#34;Возьми уникальный кофе домой&#34;, фирменные товары</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Strategy -->
+                <div class="bg-stone-50 rounded-2xl p-8">
+                    <h3 class="font-serif text-2xl font-semibold mb-6">Ценовая Стратегия</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-lg mb-4">Акции для Непиковых Часов</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-4 rounded-lg border border-stone-200">
+                                    <div class="font-medium text-coffee-600">&#34;Счастливые часы&#34;</div>
+                                    <div class="text-sm text-stone-600">Скидка 20% с 15:00 до 17:00</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg border border-stone-200">
+                                    <div class="font-medium text-coffee-600">Второй кофе за полцены</div>
+                                    <div class="text-sm text-stone-600">Стимулирование повторных покупок</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-4">Программа Лояльности</h4>
+                            <div class="bg-white p-6 rounded-lg border border-stone-200">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-terracotta-600 mb-2">Купи 10 → 1 в подарок</div>
+                                    <div class="text-sm text-stone-600">Простая и понятная система поощрения</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Channels -->
+    <section id="marketing-channels" class="py-20 bg-stone-50">
+        <div class="container mx-auto px-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold mb-12 text-center">План Маркетинговых Каналов и Тактик</h2>
+
+                <!-- Digital Marketing -->
+                <div class="mb-16">
+                    <h3 class="font-serif text-2xl font-semibold mb-8">Цифровой Маркетинг</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                            <i class="fab fa-vk text-3xl text-blue-600 mb-4"></i>
+                            <h4 class="font-semibold text-lg mb-3">ВКонтакте</h4>
+                            <ul class="text-sm text-stone-600 space-y-1">
+                                <li>• Локальная аудитория района</li>
+                                <li>• Группы и сообщества</li>
+                                <li>• Геотаргетированная реклама</li>
+                                <li>• Вовлечение аудитории</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                            <i class="fab fa-telegram text-3xl text-blue-500 mb-4"></i>
+                            <h4 class="font-semibold text-lg mb-3">Telegram</h4>
+                            <ul class="text-sm text-stone-600 space-y-1">
+                                <li>• Прямая коммуникация</li>
+                                <li>• Эксклюзивные предложения</li>
+                                <li>• Оперативные новости</li>
+                                <li>• Обратная связь</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offline Marketing -->
+                <div class="mb-16">
+                    <h3 class="font-serif text-2xl font-semibold mb-8">Оффлайн Маркетинг</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                                <h4 class="font-semibold text-lg mb-3 flex items-center">
+                                    <i class="fas fa-bullhorn text-coffee-600 mr-2"></i>
+                                    Горилла-Маркетинг
+                                </h4>
+                                <p class="text-stone-600 mb-3">Раздача флаеров, брендированные наклейки в районе метро и жилых комплексов</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                                <h4 class="font-semibold text-lg mb-3 flex items-center">
+                                    <i class="fas fa-handshake text-terracotta-600 mr-2"></i>
+                                    Партнерства
+                                </h4>
+                                <p class="text-stone-600 mb-3">Сотрудничество с фитнес-клубами, магазинами, коворкингами</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                            <img src="https://kimi-web-img.moonshot.cn/img/avatars.mds.yandex.net/140d662bdf127c4af9d8b8be65f72a3d3e447cc3" alt="Люди раздают флаеры на улице в Москве" class="w-full h-48 object-cover rounded-lg mb-4" size="medium" aspect="wide" style="photo" query="раздача флаеров на улице в Москве" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+                            <p class="text-sm text-stone-600">Активное участие в жизни района: фестивали, ярмарки, спонсорство</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Marketing -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200">
+                    <h3 class="font-serif text-2xl font-semibold mb-8">Ивент-Маркетинг для Непиковых Часов</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-coffee-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-wine-glass text-coffee-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Кофейные Дегустации</h4>
+                            <p class="text-sm text-stone-600">Мастер-классы по обжарке, коппинг-сессии</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-terracotta-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-gamepad text-terracotta-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Вечера Настольных Игр</h4>
+                            <p class="text-sm text-stone-600">Создание сообщества, длительное пребывание</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-book text-green-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Книжный Клуб</h4>
+                            <p class="text-sm text-stone-600">Регулярные встречи, атмосферные вечера</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget and KPI -->
+    <section id="budget" class="py-20 bg-stone-50">
+        <div class="container mx-auto px-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold mb-12 text-center">Бюджет и KPI</h2>
+
+                <!-- Budget Distribution -->
+                <div class="mb-16">
+                    <h3 class="font-serif text-2xl font-semibold mb-8">Распределение Бюджета</h3>
+                    <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-mobile-alt text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-blue-600 mb-1">40%</div>
+                                <div class="font-medium text-sm">Цифровой Маркетинг</div>
+                                <div class="text-xs text-stone-600">Реклама, контент</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-bullhorn text-green-600 text-xl"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-green-600 mb-1">30%</div>
+                                <div class="font-medium text-sm">Оффлайн Маркетинг</div>
+                                <div class="text-xs text-stone-600">Флаеры, наклейки</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-calendar text-purple-600 text-xl"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-purple-600 mb-1">20%</div>
+                                <div class="font-medium text-sm">Ивенты и Акции</div>
+                                <div class="text-xs text-stone-600">Дегустации, призы</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-piggy-bank text-yellow-600 text-xl"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-yellow-600 mb-1">10%</div>
+                                <div class="font-medium text-sm">Резерв</div>
+                                <div class="text-xs text-stone-600">Непредвиденные расходы</div>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Budget Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                <tr class="border-b border-stone-200">
+                                    <th class="text-left py-3 font-semibold">Категория Расходов</th>
+                                    <th class="text-right py-3 font-semibold">% Бюджета</th>
+                                    <th class="text-right py-3 font-semibold">Примерная сумма (руб.)</th>
+                                    <th class="text-left py-3 font-semibold">Описание</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="border-b border-stone-100">
+                                    <td class="py-3 font-medium">Цифровой Маркетинг</td>
+                                    <td class="py-3 text-right">40%</td>
+                                    <td class="py-3 text-right">40,000</td>
+                                    <td class="py-3">Таргетированная реклама, создание контента</td>
+                                </tr>
+                                <tr class="border-b border-stone-100">
+                                    <td class="py-3 font-medium">Оффлайн Маркетинг</td>
+                                    <td class="py-3 text-right">30%</td>
+                                    <td class="py-3 text-right">30,000</td>
+                                    <td class="py-3">Печать флаеров, наклеек, баннеров</td>
+                                </tr>
+                                <tr class="border-b border-stone-100">
+                                    <td class="py-3 font-medium">Ивенты и Промоакции</td>
+                                    <td class="py-3 text-right">20%</td>
+                                    <td class="py-3 text-right">20,000</td>
+                                    <td class="py-3">Дегустации, призы, скидки</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 font-medium">Резерв</td>
+                                    <td class="py-3 text-right">10%</td>
+                                    <td class="py-3 text-right">10,000</td>
+                                    <td class="py-3">Фонд на непредвиденные возможности</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPIs -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200">
+                    <h3 class="font-serif text-2xl font-semibold mb-8">Ключевые Метрики Эффективности (KPI)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-clock text-blue-600 mr-2"></i>
+                                Посетители в Непиковые Часы
+                            </h4>
+                            <p class="text-2xl font-bold text-blue-600 mb-1">+50%</p>
+                            <p class="text-sm text-stone-600">Увеличение за 3 месяца</p>
+                            <p class="text-xs text-stone-500 mt-2">Подсчет чеков 14:00-18:00</p>
+                        </div>
+
+                        <div class="bg-green-50 rounded-xl p-6">
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-users text-green-600 mr-2"></i>
+                                Новые Клиенты
+                            </h4>
+                            <p class="text-2xl font-bold text-green-600 mb-1">200+</p>
+                            <p class="text-sm text-stone-600">Жители района за 3 месяца</p>
+                            <p class="text-xs text-stone-500 mt-2">Опросы, программа лояльности</p>
+                        </div>
+
+                        <div class="bg-purple-50 rounded-xl p-6">
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-dollar-sign text-purple-600 mr-2"></i>
+                                Средний Чек
+                            </h4>
+                            <p class="text-2xl font-bold text-purple-600 mb-1">+20%</p>
+                            <p class="text-sm text-stone-600">Рост за 2 месяца</p>
+                            <p class="text-xs text-stone-500 mt-2">Анализ данных кассы</p>
+                        </div>
+
+                        <div class="bg-orange-50 rounded-xl p-6">
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-share-alt text-orange-600 mr-2"></i>
+                                Вовлеченность в Соцсетях
+                            </h4>
+                            <p class="text-sm text-stone-600 mb-1">Рост подписчиков, лайков</p>
+                            <p class="text-xs text-stone-500">Встроенная аналитика</p>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-6">
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-star text-red-600 mr-2"></i>
+                                Отзывы и Рейтинги
+                            </h4>
+                            <p class="text-sm text-stone-600 mb-1">Увеличение положительных отзывов</p>
+                            <p class="text-xs text-stone-500">Яндекс.Карты, Google Maps</p>
+                        </div>
+
+                        <div class="bg-teal-50 rounded-xl p-6">
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-chart-line text-teal-600 mr-2"></i>
+                                Общая Заполняемость
+                            </h4>
+                            <p class="text-sm text-stone-600 mb-1">Целевой показатель: 80%</p>
+                            <p class="text-xs text-stone-500">Ежедневный мониторинг</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+  // Initialize Mermaid
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#faf7f2',
+      primaryTextColor: '#5c4433',
+      primaryBorderColor: '#b8865a',
+      lineColor: '#b8865a',
+      secondaryColor: '#f4ede1',
+      tertiaryColor: '#e8d9c5',
+      background: '#faf7f2',
+      mainBkg: '#faf7f2',
+      secondBkg: '#f4ede1',
+      tertiaryBkg: '#e8d9c5',
+      // Enhanced contrast colors for different node types
+      cScale0: '#faf7f2',
+      cScale1: '#f4ede1',
+      cScale2: '#e8d9c5',
+      cScale3: '#dbbf9f',
+      cScale4: '#c9a277',
+      cScale5: '#b8865a',
+      cScale6: '#a5754f',
+      cScale7: '#8a5f43',
+      cScale8: '#714f3a',
+      cScale9: '#5c4433',
+      // Text colors for better contrast
+      cScale0Text: '#5c4433',
+      cScale1Text: '#5c4433',
+      cScale2Text: '#5c4433',
+      cScale3Text: '#5c4433',
+      cScale4Text: '#5c4433',
+      cScale5Text: '#faf7f2',
+      cScale6Text: '#faf7f2',
+      cScale7Text: '#faf7f2',
+      cScale8Text: '#faf7f2',
+      cScale9Text: '#faf7f2'
+    },
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true,
+      curve: 'basis'
+    },
+    timeline: {
+      useMaxWidth: false
+    },
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '14px'
+  });
+
+  // Initialize Mermaid Controls for zoom and pan
+  function initializeMermaidControls() {
+    const containers = document.querySelectorAll('.mermaid-container');
+
+    containers.forEach(container => {
+      const mermaidElement = container.querySelector('.mermaid');
+      let scale = 1;
+      let isDragging = false;
+      let startX, startY, translateX = 0, translateY = 0;
+
+      // Zoom controls
+      const zoomInBtn = container.querySelector('.zoom-in');
+      const zoomOutBtn = container.querySelector('.zoom-out');
+      const resetBtn = container.querySelector('.reset-zoom');
+      const fullscreenBtn = container.querySelector('.fullscreen');
+
+      function updateTransform() {
+        mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+        if (scale > 1) {
+          container.classList.add('zoomed');
+        } else {
+          container.classList.remove('zoomed');
+        }
+
+        mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+      }
+
+      if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', () => {
+          scale = Math.min(scale * 1.25, 4);
+          updateTransform();
+        });
+      }
+
+      if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', () => {
+          scale = Math.max(scale / 1.25, 0.3);
+          if (scale <= 1) {
+            translateX = 0;
+            translateY = 0;
+          }
+          updateTransform();
+        });
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          scale = 1;
+          translateX = 0;
+          translateY = 0;
+          updateTransform();
+        });
+      }
+
+      if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', () => {
+          if (container.requestFullscreen) {
+            container.requestFullscreen();
+          } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+          } else if (container.msRequestFullscreen) {
+            container.msRequestFullscreen();
+          }
+        });
+      }
+
+      // Mouse Events
+      mermaidElement.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        mermaidElement.style.cursor = 'grabbing';
+        updateTransform();
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          translateX = e.clientX - startX;
+          translateY = e.clientY - startY;
+          updateTransform();
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          mermaidElement.style.cursor = 'grab';
+          updateTransform();
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          mermaidElement.style.cursor = 'grab';
+          updateTransform();
+        }
+      });
+
+      // Touch Events
+      mermaidElement.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          const touch = e.touches[0];
+          startX = touch.clientX - translateX;
+          startY = touch.clientY - translateY;
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      mermaidElement.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches.length === 1) {
+          const touch = e.touches[0];
+          translateX = touch.clientX - startX;
+          translateY = touch.clientY - startY;
+          updateTransform();
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      mermaidElement.addEventListener('touchend', (e) => {
+        isDragging = false;
+      });
+
+      mermaidElement.addEventListener('touchcancel', (e) => {
+        isDragging = false;
+      });
+
+      // Enhanced wheel zoom with better center point handling
+      container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const rect = container.getBoundingClientRect();
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+        // Adjust translation to zoom towards center
+        if (newScale !== scale) {
+          const scaleDiff = newScale / scale;
+          translateX = translateX * scaleDiff;
+          translateY = translateY * scaleDiff;
+          scale = newScale;
+
+          if (scale <= 1) {
+            translateX = 0;
+            translateY = 0;
+          }
+
+          updateTransform();
+        }
+      });
+
+      // Initialize display
+      updateTransform();
+    });
+  }
+
+  // Initialize controls after mermaid renders
+  setTimeout(initializeMermaidControls, 1500);
+
+  // TOC Toggle for Mobile
+  const tocToggle = document.getElementById('toc-toggle');
+  const toc = document.getElementById('toc');
+
+  tocToggle.addEventListener('click', () => {
+    toc.classList.toggle('-translate-x-full');
+  });
+
+  // Smooth Scrolling for TOC Links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        // Close mobile TOC after click
+        if (window.innerWidth < 1024) {
+          toc.classList.add('-translate-x-full');
+        }
+      }
+    });
+  });
+
+  // Close mobile TOC when clicking outside
+  document.addEventListener('click', function(event) {
+    if (window.innerWidth >= 1024) return;
+
+    const isClickInsideToc = toc.contains(event.target);
+    const isClickOnToggle = tocToggle.contains(event.target);
+
+    if (!isClickInsideToc && !isClickOnToggle && !toc.classList.contains('-translate-x-full')) {
+      toc.classList.add('-translate-x-full');
+    }
+  });
+
+  // Highlight Active TOC Item on Scroll
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('#toc a[href^="#"]');
+
+  function highlightActiveTocItem() {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    tocLinks.forEach(link => {
+      link.classList.remove('bg-coffee-100', 'text-coffee-700', 'font-medium');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('bg-coffee-100', 'text-coffee-700', 'font-medium');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', highlightActiveTocItem);
+</script>
+
+
+</body></html>

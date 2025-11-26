@@ -1,5 +1,6 @@
 import React from 'react'
 import './InteractiveMap.css'
+import {MapComponent} from "./Map.jsx";
 
 const InteractiveMap = ({ onLocationSelect }) => {
   const handleMapClick = () => {
@@ -15,17 +16,18 @@ const InteractiveMap = ({ onLocationSelect }) => {
       </p>
 
       <div className="map-container">
-        <div className="russia-map" onClick={handleMapClick}>
+        <div className="russia-map" onContextMenu={handleMapClick}>
           {/* Карта 2GIS в iframe */}
-          <iframe
-            src="https://2gis.ru/geo/70030076160677611?m=37.617222%2C55.755833%2F10"
-            width="100%"
-            height="400"
-            frameBorder="0"
-            allowFullScreen
-            title="Карта России 2GIS"
-            className="map-iframe"
-          />
+          <MapComponent id={"ssss"} />
+          {/*<iframe*/}
+          {/*  src="https://2gis.ru/geo/70030076160677611?m=37.617222%2C55.755833%2F10"*/}
+          {/*  width="100%"*/}
+          {/*  height="400"*/}
+          {/*  frameBorder="0"*/}
+          {/*  allowFullScreen*/}
+          {/*  title="Карта России 2GIS"*/}
+          {/*  className="map-iframe"*/}
+          {/*/>*/}
         </div>
       </div>
 

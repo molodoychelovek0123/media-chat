@@ -11,5 +11,6 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false
-  }
+  },
+  base: './' // Для корректной работы статических файлов при открытии напрямую
 })

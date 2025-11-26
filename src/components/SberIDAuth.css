@@ -49,6 +49,7 @@
   flex-direction: column;
   gap: 12px;
   margin-bottom: 24px;
+    display: none;
 }
 
 .benefit {
@@ -127,6 +128,78 @@
   color: var(--text-light);
   font-size: 14px;
 }
+
+.SberIdButton_root__e00xh {
+    width: 100%;
+    outline: none;
+    height: 48px;
+    border-radius: 30px;
+    font-family: SB Sans Interface, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid #767676;
+    background: #fff;
+    color: #1f1f22;
+    fill: #21a038;
+    cursor: pointer;
+}
+
+.SberIdButton_root__e00xh a {
+    height: 100%;
+    width: 100%;
+    fill: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    cursor: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none
+}
+
+.SberIdButton_root__e00xh a,.SberIdButton_root__e00xh a:focus {
+    background-color: inherit;
+    border-radius: inherit;
+    color: inherit;
+    border: 0;
+    outline: none
+}
+
+.SberIdButton_root__e00xh a:hover {
+    background-color: inherit;
+    color: inherit;
+    border-radius: inherit;
+    outline: none
+}
+
+.SberIdButton_root__e00xh a span,.SberIdButton_root__e00xh a:active {
+    background-color: inherit;
+    color: inherit;
+    border-radius: inherit;
+    border: 0;
+    outline: none
+}
+
+.SberIdButton_root__e00xh a span {
+    fill: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit
+}
+
+.SberIdButton_root__e00xh a span svg {
+    fill: inherit!important
+}
+
+.SberIdButton_root__e00xh svg {
+    width: 16px!important;
+    height: 16px!important
+}
+
 
 /* Адаптивность */
 @media (max-width: 768px) {
